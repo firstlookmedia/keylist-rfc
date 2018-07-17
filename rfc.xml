@@ -32,12 +32,12 @@
     <keyword>Keylist</keyword>
     <abstract>
       <t>This document specifies a system by which OpenPGP clients may subscribe to
-        an organization's keylist and keep its internal keystore up-to-date. Ensuring
+        an organization's keylist to keep its internal keystore up-to-date. Ensuring
         that all members of an organization have their colleagues' most recent PGP
         keys is critical to maintaining operational security. To enable cross-client
         compatibility, this document proposes a standard format for the keylist file
         as well as feature requirements for OpenPGP clients who wish to implement
-        this functionality.
+        keylist subscription functionality.
       </t>
       <!-- We'll want to tighten this abstract up a bit... ~MM -->
     </abstract>
@@ -103,9 +103,13 @@
             explicitly provided by the user.</t>
           <!-- TODO: Should I not say 'user'? Is there a better way to phrase this? ~MM -->
         </section>
-        <section anchor="keylist-refresh"
+        <section anchor="keylist-update"
                  title="Periodic Updates">
-          <!-- TODO -->
+          <t>The primary purpose of keylists is to enable periodic updates of OpenPGP
+            clients' internal keystores. We RECOMMEND that OpenPGP clients provide
+            a default refresh interval of less than one day, however we also RECOMMEND
+            that OpenPGP clients allow the user to select this interval.</t>
+          <t>
         </section>
         <section anchor="keylist-crypto"
                  title="Cryptographic Verification of Keylists">
