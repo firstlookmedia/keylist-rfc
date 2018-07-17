@@ -41,10 +41,11 @@
         a cryptographically signed keylist published by an organization. This system
         allows for seamless key rotation across an entire organization and enhances
         operational security. The user interface by which an OpenPGP client provides
-        this functionality to the user is out of scope, as are other non-security-related
-        implementation details. This document instead provides a standard format
-        for the keylist, its cryptographic verification, and the method by which
-        it is retreived over the Internet to enable cross-client compatibility.
+        this functionality to the user is out of scope, as is the process by which
+        the OpenPGP client retrieves keys. Other non-security-related implementation
+        details are also out of scope. To enable cross-client compatibility, this
+        document instead provides a standard format for the keylist, its cryptographic
+        verification, and the method by which it is retreived over the Internet.
       </t>
       <section anchor="notation" title="Requirements Notation">
         <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
@@ -57,6 +58,7 @@
           "keystore", and "fingerprint" defined by OpenPGP Message Format [RFC4880].
         </t>
         <!-- TODO: verify that all the previous terms are actually defined in RFC4880. ~MM -->
+        <!-- TODO: does 'URI' and 'Internet' need a citation? Probably not, but we should check. ~MM -->
         <t>The term "keylist" is defined as a list of OpenPGP keys identified by their
           fingerprints accessible via a URI. The exact format of this data is specified
           in "Data Element Formats".
@@ -65,17 +67,20 @@
         <!-- TODO: I avoid using the word 'file' here as it has a nuanced meaning and really we're just talking about data accessible via a URI. Is there a term other than 'data' that is appropriate here? ~MM -->
       </section>
       <section anchor="functions" title="General Functions">
-        Keylists enable organizations to publish a directory of OpenPGP keys that OpenPGP
-        clients can use to keep their internal keystores up-to-date. To maintain
-        As new keys are added and other keys are revoked, it is critica
-        <!-- TODO -->
+        <t>As new keys are creates and other keys are revoked, it is critical that all
+          members of an organization have the most recent set of keys available on
+          their computers. Keylists enable organizations to publish a directory of
+          OpenPGP keys that OpenPGP clients can use to keep their internal keystores
+          up-to-date. A single OpenPGP client may subscribe to many different keylists,
+          or none at all.
+        </t>
         <section anchor="keylist-subscribe" title="Subscribing to Keylists">
           <!-- TODO -->
         </section>
         <section anchor="keylist-refresh" title="Periodic updates">
           <!-- TODO -->
         </section>
-        <section anchor="keylist-crypto" title="Cryptographic Verification of keylists">
+        <section anchor="keylist-crypto" title="Cryptographic Verification of Keylists">
           <!-- TODO -->
         </section>
       </section>
