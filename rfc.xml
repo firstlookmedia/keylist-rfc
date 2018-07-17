@@ -55,7 +55,7 @@
         organizations and enhances operational security. To enable cross-client compatibility,
         this document provides a standard format for the keylist, its cryptographic
         verification, and the method by which it is retreived by the client. The
-        user interface by which an client provides this functionality to the user
+        user interface by which a client provides this functionality to the user
         is out of scope, as is the process by which the client retrieves public keys.
         Other non-security-related implementation details are also out of scope.
       </t>
