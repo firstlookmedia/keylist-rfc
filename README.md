@@ -19,3 +19,5 @@ RFCs that are potentially relevant to the preparation of this document are liste
 
 ## TODO
 * Add two blank spaces after each period in the RFC.
+* Expand acronyms on first use.
+* List normative and informative references.
