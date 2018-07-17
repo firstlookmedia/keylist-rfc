@@ -78,13 +78,13 @@
       <section anchor="terminology"
                title="Terminology">
         <t>This document uses the terms "OpenPGP", "public key", "private key", "signature",
-          "keystore", and "fingerprint" defined by OpenPGP Message Format [RFC4880].
+          "keystore", and "fingerprint" as defined by OpenPGP Message Format [RFC4880].
         </t>
         <!-- TODO: verify that all the previous terms are actually defined in RFC4880. ~MM -->
         <!-- TODO: does 'URI' and 'Internet' need a citation? Probably not, but we should check. ~MM -->
         <t>The term "keylist" is defined as a list of OpenPGP public keys identified
-          by their fingerprints accessible via a URI. The exact format of this data
-          is specified in "Data Element Formats".</t>
+          by their fingerprints and accessible via a URI. The exact format of this
+          data is specified in "Data Element Formats".</t>
         <!-- TODO: find out how to hyperlink sections. ~ MM -->
         <!-- TODO: I avoid using the word 'file' here as it has a nuanced meaning and really we're just talking about data accessible via a URI. Is there a term other than 'data' that is appropriate here? ~MM -->
         <t>An "authority key" is defined as the OpenPGP used to sign a particular keylist.
