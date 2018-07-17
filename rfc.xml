@@ -79,7 +79,7 @@
       </section>
       <section anchor="functions"
                title="General Functions">
-        <t>As new keys are creates and other keys are revoked, it is critical that all
+        <t>As new keys are created and other keys are revoked, it is critical that all
           members of an organization have the most recent set of keys available on
           their computers. Keylists enable organizations to publish a directory of
           OpenPGP keys that OpenPGP clients can use to keep their internal keystores
