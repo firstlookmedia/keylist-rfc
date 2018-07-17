@@ -16,3 +16,6 @@ RFCs that are potentially relevant to the preparation of this document are liste
 * [RFC2026](https://tools.ietf.org/html/rfc2026): The Internet Standards Process (rev.3; note: errata exist)
 * [RFC4880](https://www.rfc-editor.org/rfc/rfc4880.txt): OpenPGP Message Format
 * [RFC2629](https://tools.ietf.org/html/rfc2629): Writing I-Ds and RFCs using XML
+
+## TODO
+* Add two blank spaces after each period in the RFC.
