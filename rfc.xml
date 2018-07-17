@@ -46,15 +46,15 @@
   <middle>
     <section anchor="intro"
              title="Introduction">
-      <t>This document specifies a system by which OpenPGP clients may subscribe to
-        a cryptographically signed keylist published by an organization. This system
-        allows for seamless key rotation across an entire organization and enhances
-        operational security. The user interface by which an OpenPGP client provides
-        this functionality to the user is out of scope, as is the process by which
-        the OpenPGP client retrieves keys. Other non-security-related implementation
-        details are also out of scope. To enable cross-client compatibility, this
-        document instead provides a standard format for the keylist, its cryptographic
-        verification, and the method by which it is retreived over the Internet.
+      <t>This document specifies a system by which clients may subscribe to a cryptographically
+        signed keylist published by an organization. This system allows for seamless
+        key rotation across an entire organization and enhances operational security.
+        The user interface by which an client provides this functionality to the
+        user is out of scope, as is the process by which the client retrieves keys.
+        Other non-security-related implementation details are also out of scope.
+        To enable cross-client compatibility, this document instead provides a standard
+        format for the keylist, its cryptographic verification, and the method by
+        which it is retreived over the Internet.
       </t>
       <section anchor="notation"
                title="Requirements Notation">
