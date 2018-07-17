@@ -26,8 +26,8 @@
     <keyword>GPGSync</keyword>
     <keyword>GPG</keyword>
     <abstract>
-      <t>Ensuring that all members of an organization have their colleagues' most recent PGP keys is critical to maintaining operational security. This document specifies a system by which OpenPGP clients may subscribe to an organization's key-list and
-        keep its internal keystore up-to-date. To enable cross-client compatibility, this document proposes a standard format for the key-list file as well as feature requirements for OpenPGP clients who wish to implement this functionality.
+      <t>This document specifies a system by which OpenPGP clients may subscribe to an organization's key-list and keep its internal keystore up-to-date. Ensuring that all members of an organization have their colleagues' most recent PGP keys is critical
+        to maintaining operational security. To enable cross-client key-list compatibility, this document proposes a standard format for the key-list file as well as feature requirements for OpenPGP clients who wish to implement this functionality.
       </t>
     </abstract>
     <note/>
@@ -36,10 +36,44 @@
     <section anchor="intro" title="Introduction">
       <t>This document specifies a system by which OpenPGP clients may subscribe to a cryptographically signed key-list published by an organization. This system allows for seamless key rotation across an organization.</t>
     </section>
-    <section anchor="requirementslanguage" title="Requirements Language">
+    <section anchor="terms" title="terms">
+      <!-- TODO -->
+
       <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC2119].
       </t>
     </section>
+    <section anchor="functions" title="General Functions">
+      <!-- TODO -->
+      <section anchor="keylist-subscribe" title="Subscribing to Key-lists">
+        <!-- TODO -->
+      </section>
+      <section anchor="keylist-refresh" title="Periodic updates">
+        <!-- TODO -->
+      </section>
+      <section anchor="keylist-crypto" title="Cryptographic Verification of Key-lists">
+        <!-- TODO -->
+      </section>
+    </section>
+    <section anchor="formats" title="Data Element Formats">
+      <!-- TODO -->
+      <section anchor="terms" title="Fingerprint File">
+        <!-- TODO -->
+      </section>
+      <section anchor="sigfile" title="Signature File">
+        <!-- TODO -->
+      </section>
+    </section>
+    <section anchor="retrieval" title="Data Retrieval">
+      <!-- TODO -->
+    </section>
+
+    <!-- ... body text ... -->
+
+    <section anchor="securityconsiderations" title="Security Considerations">
+      <t><!-- TODO, see https://tools.ietf.org/html/bcp72 --></t>
+    </section>
+
+    <!-- TODO: other elements -->
   </middle>
   <back></back>
 </rfc>
