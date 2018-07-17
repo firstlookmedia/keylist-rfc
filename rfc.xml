@@ -33,8 +33,8 @@
     <abstract>
       <t>This document specifies a system by which clients may subscribe to an organization's
         keylist to keep its internal keystore up-to-date. Ensuring that all members
-        of an organization have their colleagues' most recent PGP keys is critical
-        to maintaining operational security. To enable cross-client compatibility,
+        of an organization have their colleagues' most recent PGP public keys is
+        critical to maintaining operational security. To enable cross-client compatibility,
         this document proposes a standard format for the keylist file as well as
         feature requirements for clients who wish to implement keylist subscription
         functionality.
@@ -50,8 +50,8 @@
         signed keylist published by an organization. This system allows for seamless
         key rotation across an entire organization and enhances operational security.
         The user interface by which an client provides this functionality to the
-        user is out of scope, as is the process by which the client retrieves keys.
-        Other non-security-related implementation details are also out of scope.
+        user is out of scope, as is the process by which the client retrieves public
+        keys. Other non-security-related implementation details are also out of scope.
         To enable cross-client compatibility, this document instead provides a standard
         format for the keylist, its cryptographic verification, and the method by
         which it is retreived over the Internet.
@@ -70,9 +70,9 @@
         </t>
         <!-- TODO: verify that all the previous terms are actually defined in RFC4880. ~MM -->
         <!-- TODO: does 'URI' and 'Internet' need a citation? Probably not, but we should check. ~MM -->
-        <t>The term "keylist" is defined as a list of OpenPGP keys identified by their
-          fingerprints accessible via a URI. The exact format of this data is specified
-          in "Data Element Formats".</t>
+        <t>The term "keylist" is defined as a list of OpenPGP public keys identified
+          by their fingerprints accessible via a URI. The exact format of this data
+          is specified in "Data Element Formats".</t>
         <!-- TODO: find out how to hyperlink sections. ~ MM -->
         <!-- TODO: I avoid using the word 'file' here as it has a nuanced meaning and really we're just talking about data accessible via a URI. Is there a term other than 'data' that is appropriate here? ~MM -->
         <t>An "authority key" is defined as the OpenPGP used to sign a particular keylist.
@@ -89,7 +89,7 @@
           with an OpenPGP client to update its keystore.</t>
       </section>
       <section anchor="functions"
-               title="General Functions">
+               title="Functions and Procedures">
         <t>As new keys are created and other keys are revoked, it is critical that all
           members of an organization have the most recent set of keys available on
           their computers. Keylists enable organizations to publish a directory of
@@ -104,18 +104,40 @@
             automatic updates.</t>
           <t>To subscribe to a keylist, the client must be aware of the keylist URI,
             the keylist's signature URI, and the fingerprint of the authority key
-            used to sign the keylist. An client MUST NOT employ a trust-on-first-use
-            model for determining the fingerprint of the authority key; it must be
-            explicitly provided by the user.</t>
-          <!-- TODO: Should I not say 'user'? Is there a better way to phrase this? ~MM -->
+            used to sign the keylist. The protocol used to retrieve the keylist and
+            its signature SHOULD be HTTPS, however other implementation are possible.
+            A client implementing keylist functionality MUST support the retrieval
+            of keylists and signatures over HTTPS, but no other protocols are required.</t>
+          <t>An client MUST NOT employ a trust-on-first-use model for determining the
+            fingerprint of the authority key; it must be explicitly provided by the
+            user.
+          </t>
+          <t>The process by which the client stores its keylist subscriptions to a keylist
+            is out of scope, as is the means by which subscription functionality
+            is exposed to the end-user.</t>
         </section>
         <section anchor="keylist-update"
                  title="Periodic Updates">
           <t>The primary purpose of keylists is to enable periodic updates of OpenPGP
-            clients' internal keystores. We RECOMMEND that OpenPGP clients provide
-            a default refresh interval of less than one day, however we also RECOMMEND
-            that OpenPGP clients allow the user to select this interval.</t>
-          <t>
+            clients' internal keystores. We RECOMMEND that clients provide a default
+            refresh interval of less than one day, however we also RECOMMEND that
+            client s allow the user to select this interval. The exact time at which
+            updates are performed is not critical.</t>
+          <t>To perform an update, the client MUST perform the following steps. They
+            SHOULD be performed in the given order.</t>
+          <list style="numbers">
+            <t>Obtain a current copy of the keylist.</t>
+            <t>Obtain a current copy of the keylist's signature data.</t>
+            <!-- I say 'obtain' rather than retrieve because I want to leave open the possibility of a client checking to see if the hash of the file, for example, has changed, and only re-requesting if it has. 'Obtain' is also very ambiguous, though, so it may be to our advantage to use something more specific or explain this rationale outright. ~MM -->
+            <t>Verify that the keylist's signature matches the keylist data. If the
+              signature does not match, the client MUST abort the update and SHOULD
+              alert the user.</t>
+            <t>For each key listed in the keyfile, either refresh it from the keyserver
+              if a copy of the public key is already present in the client's local
+              keystore or retrieve it from the keyserver if it is not already present.
+              The method by which keys are retrieved and updated is out of scope.</t>
+            <!-- TODO: Is it overkill to establish some concept of a 'linked keystore' as the keystore that the client interacts with and keeps updated? This is a potential ambiguity for machines with multiple keystores. ~MM -->
+            <!-- TODO: Should anything else be in this list? ~MM -->
         </section>
         <section anchor="keylist-crypto"
                  title="Cryptographic Verification of Keylists">
