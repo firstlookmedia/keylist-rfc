@@ -1,21 +1,29 @@
 <?xml version="1.0"?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd">
-<rfc ipr="full2026" docName="draft-flm-openpgp-sync-01">
+<rfc ipr="full2026"
+     docName="draft-flm-openpgp-sync-01">
   <front>
     <!-- Working title. We'll want something that more accurately frames the system before we submit. It never also hurts to have a more catchy title... -->
-    <title abbrev="OpenPGP Keylist Subscriptions">Safely Distributing OpenPGP Keys with Keylist Subscriptions</title>
+    <title abbrev="OpenPGP Keylist Subscriptions">
+      Safely Distributing OpenPGP Keys with Keylist Subscriptions
+    </title>
     <!-- I don't care about the order of authors. Note that IETF consisters all named authors to have contributed equally. Feel free to reorder if you'd like. -->
-    <author initials="M.M." surname="McCain" fullname="R. Miles McCain">
+    <author initials="M.M."
+            surname="McCain"
+            fullname="R. Miles McCain">
       <organization abbrev="FLM">First Look Media</organization>
       <email>ietf@sendmiles.email</email>
       <uri>https://rmrm.io</uri>
     </author>
-    <author initials="M.L." surname="Lee" fullname="Micah F. Lee">
+    <author initials="M.L."
+            surname="Lee"
+            fullname="Micah F. Lee">
       <organization abbrev="TI">The Intercept</organization>
       <email>micah.lee@theintercept.com</email>
       <uri>https://micahflee.com/</uri>
     </author>
-    <date month="July" year="2018" />
+    <date month="July"
+          year="2018" />
     <area>Security</area>
     <!-- Given that 'key management' is listed as a critical category of the 'Security' area, I believe that this I-D is best suited for the 'Security' area. ~MM -->
     <keyword>OpenPGP</keyword>
@@ -36,7 +44,8 @@
     <note/>
   </front>
   <middle>
-    <section anchor="intro" title="Introduction">
+    <section anchor="intro"
+             title="Introduction">
       <t>This document specifies a system by which OpenPGP clients may subscribe to
         a cryptographically signed keylist published by an organization. This system
         allows for seamless key rotation across an entire organization and enhances
@@ -47,13 +56,15 @@
         document instead provides a standard format for the keylist, its cryptographic
         verification, and the method by which it is retreived over the Internet.
       </t>
-      <section anchor="notation" title="Requirements Notation">
+      <section anchor="notation"
+               title="Requirements Notation">
         <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
           "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are
           to be interpreted as described in [RFC2119].
         </t>
       </section>
-      <section anchor="terminology" title="Terminology">
+      <section anchor="terminology"
+               title="Terminology">
         <t>This document uses the terms "OpenPGP", "public key", "private key", "signature",
           "keystore", and "fingerprint" defined by OpenPGP Message Format [RFC4880].
         </t>
@@ -66,7 +77,8 @@
         <!-- TODO: find out how to hyperlink sections. ~ MM -->
         <!-- TODO: I avoid using the word 'file' here as it has a nuanced meaning and really we're just talking about data accessible via a URI. Is there a term other than 'data' that is appropriate here? ~MM -->
       </section>
-      <section anchor="functions" title="General Functions">
+      <section anchor="functions"
+               title="General Functions">
         <t>As new keys are creates and other keys are revoked, it is critical that all
           members of an organization have the most recent set of keys available on
           their computers. Keylists enable organizations to publish a directory of
@@ -74,30 +86,38 @@
           up-to-date. A single OpenPGP client may subscribe to many different keylists,
           or none at all.
         </t>
-        <section anchor="keylist-subscribe" title="Subscribing to Keylists">
+        <section anchor="keylist-subscribe"
+                 title="Subscribing to Keylists">
           <!-- TODO -->
         </section>
-        <section anchor="keylist-refresh" title="Periodic updates">
+        <section anchor="keylist-refresh"
+                 title="Periodic updates">
           <!-- TODO -->
         </section>
-        <section anchor="keylist-crypto" title="Cryptographic Verification of Keylists">
+        <section anchor="keylist-crypto"
+                 title="Cryptographic Verification of Keylists">
           <!-- TODO -->
         </section>
       </section>
-      <section anchor="formats" title="Data Element Formats">
+      <section anchor="formats"
+               title="Data Element Formats">
         <!-- TODO -->
-        <section anchor="terms" title="Keylist File">
+        <section anchor="terms"
+                 title="Keylist File">
           <!-- TODO -->
         </section>
-        <section anchor="sigfile" title="Signature File">
+        <section anchor="sigfile"
+                 title="Signature File">
           <!-- TODO -->
         </section>
       </section>
-      <section anchor="retrieval" title="Data Retrieval">
+      <section anchor="retrieval"
+               title="Data Retrieval">
         <!-- TODO -->
       </section>
       <!-- ... body text ... -->
-      <section anchor="securityconsiderations" title="Security Considerations">
+      <section anchor="securityconsiderations"
+               title="Security Considerations">
         <t>
           <!-- TODO, see https://tools.ietf.org/html/bcp72 -->
         </t>
