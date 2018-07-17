@@ -36,6 +36,10 @@
     <section anchor="intro" title="Introduction">
       <t>This document specifies a system by which OpenPGP clients may subscribe to a cryptographically signed key-list published by an organization. This system allows for seamless key rotation across an organization.</t>
     </section>
+    <section anchor="requirementslanguage" title="Requirements Language">
+      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC2119].
+      </t>
+    </section>
   </middle>
   <back></back>
 </rfc>
