@@ -72,33 +72,39 @@
         <!-- TODO: does 'URI' and 'Internet' need a citation? Probably not, but we should check. ~MM -->
         <t>The term "keylist" is defined as a list of OpenPGP keys identified by their
           fingerprints accessible via a URI. The exact format of this data is specified
-          in "Data Element Formats". An "authority key" is defined as the OpenPGP
-          used to sign a particular keylist. Every keylist has a corresponding authority
-          key, and every authority key has at least one corresponding keylist. For
-          security purposes, a single authority key SHOULD NOT be used to sign multiple
-          keylists.
-        </t>
+          in "Data Element Formats".</t>
         <!-- TODO: find out how to hyperlink sections. ~ MM -->
         <!-- TODO: I avoid using the word 'file' here as it has a nuanced meaning and really we're just talking about data accessible via a URI. Is there a term other than 'data' that is appropriate here? ~MM -->
+        <t>An "authority key" is defined as the OpenPGP used to sign a particular keylist.
+          Every keylist has a corresponding authority key, and every authority key
+          has at least one corresponding keylist. For security purposes, a single
+          authority key SHOULD NOT be used to sign multiple keylists.
+        </t>
+        <t>To be "subscribed" to a keylist means that a program will retreive that keylist
+          on a regular interval and subsequently perform an update to an internal
+          OpenPGP keystore.</t>
+        <!-- TODO: This needs to be cleaned/tightened. ~MM -->
+        <t>A "client" is a program that allows the user to subscribe to keylists. A
+          client may be an OpenPGP client itself or a separate program that interfaces
+          with an OpenPGP client to update its keystore.</t>
       </section>
       <section anchor="functions"
                title="General Functions">
         <t>As new keys are created and other keys are revoked, it is critical that all
           members of an organization have the most recent set of keys available on
           their computers. Keylists enable organizations to publish a directory of
-          OpenPGP keys that OpenPGP clients can use to keep their internal keystores
-          up-to-date.
+          OpenPGP keys that clients can use to keep their internal keystores up-to-date.
         </t>
         <section anchor="keylist-subscribe"
                  title="Subscribing to Keylists">
-          <t>A single OpenPGP client may subscribe to many different keylists, or none
-            at all. When an OpenPGP client first subscribes to a keylist, it SHOULD
-            update or import every key present in the keylist. Keylist subscriptions
-            SHOULD be persistent--that is, they should be permanently stored by the
-            OpenPGP client to enable future automatic updates.</t>
-          <t>To subscribe to a keylist, the OpenPGP client must be aware of the keylist
-            URI, the keylist's signature URI, and the fingerprint of the authority
-            key used to sign the keylist. An OpenPGP client MUST NOT employ a trust-on-first-use
+          <t>A single client may subscribe to many different keylists, or none at all.
+            When an client first subscribes to a keylist, it SHOULD update or import
+            every key present in the keylist. Keylist subscriptions SHOULD be persistent--that
+            is, they should be permanently stored by the client to enable future
+            automatic updates.</t>
+          <t>To subscribe to a keylist, the client must be aware of the keylist URI,
+            the keylist's signature URI, and the fingerprint of the authority key
+            used to sign the keylist. An client MUST NOT employ a trust-on-first-use
             model for determining the fingerprint of the authority key; it must be
             explicitly provided by the user.</t>
           <!-- TODO: Should I not say 'user'? Is there a better way to phrase this? ~MM -->
