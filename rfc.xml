@@ -15,7 +15,7 @@
       <email>micah.lee@theintercept.com</email>
       <uri>https://micahflee.com/</uri>
     </author>
-    <date month="July" year="2018"/>
+    <date month="July" year="2018" />
     <area>Security</area>
     <!-- Given that 'key management' is listed as a critical category of the 'Security' area, I believe that this I-D is best suited for the 'Security' area. ~MM -->
     <keyword>OpenPGP</keyword>
@@ -23,8 +23,13 @@
     <keyword>GPG</keyword>
     <keyword>Keylist</keyword>
     <abstract>
-      <t>This document specifies a system by which OpenPGP clients may subscribe to an organization's keylist and keep its internal keystore up-to-date. Ensuring that all members of an organization have their colleagues' most recent PGP keys is critical to
-        maintaining operational security. To enable cross-client compatibility, this document proposes a standard format for the keylist file as well as feature requirements for OpenPGP clients who wish to implement this functionality.
+      <t>This document specifies a system by which OpenPGP clients may subscribe to
+        an organization's keylist and keep its internal keystore up-to-date. Ensuring
+        that all members of an organization have their colleagues' most recent PGP
+        keys is critical to maintaining operational security. To enable cross-client
+        compatibility, this document proposes a standard format for the keylist file
+        as well as feature requirements for OpenPGP clients who wish to implement
+        this functionality.
       </t>
       <!-- We'll want to tighten this abstract up a bit... ~MM -->
     </abstract>
@@ -32,25 +37,37 @@
   </front>
   <middle>
     <section anchor="intro" title="Introduction">
-      <t>This document specifies a system by which OpenPGP clients may subscribe to a cryptographically signed keylist published by an organization. This system allows for seamless key rotation across an entire organization and enhances operational
-        security. The user interface by which an OpenPGP client provides this functionality to the user is out of scope, as are other non-security-related implementation details. This document instead provides a standard format for the keylist, its
-        cryptographic signature, and the method by which it is retreived over the Internet to enable cross-client compatibility.
+      <t>This document specifies a system by which OpenPGP clients may subscribe to
+        a cryptographically signed keylist published by an organization. This system
+        allows for seamless key rotation across an entire organization and enhances
+        operational security. The user interface by which an OpenPGP client provides
+        this functionality to the user is out of scope, as are other non-security-related
+        implementation details. This document instead provides a standard format
+        for the keylist, its cryptographic verification, and the method by which
+        it is retreived over the Internet to enable cross-client compatibility.
       </t>
       <section anchor="notation" title="Requirements Notation">
-        <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC2119].
+        <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+          "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are
+          to be interpreted as described in [RFC2119].
         </t>
       </section>
       <section anchor="terminology" title="Terminology">
-        <t>This document uses the terms "OpenPGP", "public key", "private key", "signature", and "fingerprint" defined by OpenPGP Message Format [RFC4880].
+        <t>This document uses the terms "OpenPGP", "public key", "private key", "signature",
+          "keystore", and "fingerprint" defined by OpenPGP Message Format [RFC4880].
         </t>
         <!-- TODO: verify that all the previous terms are actually defined in RFC4880. ~MM -->
-        <t>The term "keylist" is defined as a list of OpenPGP keys identified by their fingerprints accessible via a URI. The exact format of this data is specified in "Data Element Formats".
+        <t>The term "keylist" is defined as a list of OpenPGP keys identified by their
+          fingerprints accessible via a URI. The exact format of this data is specified
+          in "Data Element Formats".
         </t>
         <!-- TODO: find out how to hyperlink sections. ~ MM -->
         <!-- TODO: I avoid using the word 'file' here as it has a nuanced meaning and really we're just talking about data accessible via a URI. Is there a term other than 'data' that is appropriate here? ~MM -->
       </section>
       <section anchor="functions" title="General Functions">
-        As defined in this document,
+        Keylists enable organizations to publish a directory of OpenPGP keys that OpenPGP
+        clients can use to keep their internal keystores up-to-date. To maintain
+        As new keys are added and other keys are revoked, it is critica
         <!-- TODO -->
         <section anchor="keylist-subscribe" title="Subscribing to Keylists">
           <!-- TODO -->
@@ -81,6 +98,6 @@
         </t>
       </section>
       <!-- TODO: other elements -->
-    </middle>
-    <back></back>
-  </rfc>
+  </middle>
+  <back></back>
+</rfc>
