@@ -26,17 +26,16 @@
     <keyword>GPGSync</keyword>
     <keyword>GPG</keyword>
     <abstract>
-      <!-- <t>Ensuring that all members of an organization have their colleagues' most recent PGP keys is critical to maintaining operational security. This document specifies a system by which OpenPGP clients may subscribe to an organization's key-list
-      and -->
-      keep its internal keystore up-to-date. To enable cross-client compatibility, this document proposes a standard format for the key-list file as well as feature requirements for OpenPGP clients who wish to implement this functionality.
-    </t>
-  </abstract>
-  <note/>
-</front>
-<middle>
-  <section anchor="intro" title="Introduction">
-    <t>This document specifies a system by which OpenPGP clients may subscribe to a cryptographically signed key-list published by an organization. This system allows for seamless key rotation across an organization.</t>
-  </section>
-</middle>
-<back></back>
+      <t>Ensuring that all members of an organization have their colleagues' most recent PGP keys is critical to maintaining operational security. This document specifies a system by which OpenPGP clients may subscribe to an organization's key-list and
+        keep its internal keystore up-to-date. To enable cross-client compatibility, this document proposes a standard format for the key-list file as well as feature requirements for OpenPGP clients who wish to implement this functionality.
+      </t>
+    </abstract>
+    <note/>
+  </front>
+  <middle>
+    <section anchor="intro" title="Introduction">
+      <t>This document specifies a system by which OpenPGP clients may subscribe to a cryptographically signed key-list published by an organization. This system allows for seamless key rotation across an organization.</t>
+    </section>
+  </middle>
+  <back></back>
 </rfc>
