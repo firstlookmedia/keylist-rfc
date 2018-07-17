@@ -31,13 +31,13 @@
     <keyword>GPG</keyword>
     <keyword>Keylist</keyword>
     <abstract>
-      <t>This document specifies a system by which OpenPGP clients may subscribe to
-        an organization's keylist to keep its internal keystore up-to-date. Ensuring
-        that all members of an organization have their colleagues' most recent PGP
-        keys is critical to maintaining operational security. To enable cross-client
-        compatibility, this document proposes a standard format for the keylist file
-        as well as feature requirements for OpenPGP clients who wish to implement
-        keylist subscription functionality.
+      <t>This document specifies a system by which clients may subscribe to an organization's
+        keylist to keep its internal keystore up-to-date. Ensuring that all members
+        of an organization have their colleagues' most recent PGP keys is critical
+        to maintaining operational security. To enable cross-client compatibility,
+        this document proposes a standard format for the keylist file as well as
+        feature requirements for clients who wish to implement keylist subscription
+        functionality.
       </t>
       <!-- We'll want to tighten this abstract up a bit... ~MM -->
     </abstract>
