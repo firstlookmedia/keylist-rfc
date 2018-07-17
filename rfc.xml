@@ -13,15 +13,19 @@
             surname="McCain"
             fullname="R. Miles McCain">
       <organization abbrev="FLM">First Look Media</organization>
-      <email>ietf@sendmiles.email</email>
-      <uri>https://rmrm.io</uri>
+      <address>
+        <email>ietf@sendmiles.email</email>
+        <uri>https://rmrm.io</uri>
+      </address>
     </author>
     <author initials="M.L."
             surname="Lee"
             fullname="Micah F. Lee">
       <organization abbrev="TI">The Intercept</organization>
-      <email>micah.lee@theintercept.com</email>
-      <uri>https://micahflee.com/</uri>
+      <address>
+        <email>micah.lee@theintercept.com</email>
+        <uri>https://micahflee.com/</uri>
+      </address>
     </author>
     <date month="July"
           year="2018" />
