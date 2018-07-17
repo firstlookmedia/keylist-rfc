@@ -101,11 +101,10 @@
       </t>
       <section anchor="keylist-subscribe"
                title="Subscribing to Keylists">
-        <t>A single client may subscribe to many different keylists, or none at all.
-          When an client first subscribes to a keylist, it SHOULD update or import
-          every key present in the keylist. Keylist subscriptions SHOULD be persistent--that
-          is, they should be permanently stored by the client to enable future automatic
-          updates.
+        <t>A single client may subscribe to any number of keylists. When an client first
+          subscribes to a keylist, it SHOULD update or import every key present in
+          the keylist. Keylist subscriptions SHOULD be persistent--that is, they
+          should be permanently stored by the client to enable future automatic updates.
         </t>
         <t>To subscribe to a keylist, the client must be aware of the keylist URI, the
           keylist's signature URI, and the fingerprint of the authority key used
