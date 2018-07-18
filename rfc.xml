@@ -208,6 +208,17 @@
           defined in OpenPGP Message Format [RFC4880].</t>
       </section>
     </section>
+    <section anchor="inpractice"
+             title="In Practice">
+      <t>GPGSync, an open source program created by one of the authors, implements this
+        experimental standard. GPGSync is used by First Look Media, The Intercept,
+        and the Freedom of the Press Foundation to keep OpenPGP keys in sync across
+        their organizations, as well as to publish their employee's OpenPGP keys
+        to the world. These organizations collectively employ more than 200 people
+        and have used the system described in this document successfully for the
+        past two years.</t>
+      <!-- TODO: clunky. We could clean this. ~MM -->
+    </section>
     <section anchor="securityconsiderations"
              title="Security Considerations">
       <section anchor="securitybenefits"
