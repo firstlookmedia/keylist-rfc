@@ -177,10 +177,10 @@
                title="Keylist">
         <t>The keylist MUST be encoded in UTF-8. Each line MUST begin either with a
           comment, a public key fingerprint, or whitespace. A comment is defined
-          as a string of characters between a hash symbol (#, u0023) and a newline
+          as a string of characters between a hash symbol (#, U+0023) and a newline
           or an end of file (EOF). The keylist SHOULD end with a newline. The fingerprint
           MUST be the full 40-character hexadecimal public key fingerprint, as defined
-          in OpenPGP Message Format [RFC4880]. Space characters (' ', u0020) MAY
+          in OpenPGP Message Format [RFC4880]. Space characters (' ', U+0020) MAY
           be included anywhere in the fingerprint.
         </t>
         <t>It is RECOMMENDED that keylist maintainers describe each key using a comment,
