@@ -162,7 +162,10 @@
       </section>
       <section anchor="keylist-crypto"
                title="Cryptographic Verification of Keylists">
-        <!-- TODO -->
+        <t>To ensure authenticity of a keylist during an update, the client MUST verify
+          that the keylist's data matches its cryptographic signature, and that the
+          public key used to verify the signature matches the fingerprint given by
+          the user.</t>
       </section>
     </section>
     <section anchor="formats"
