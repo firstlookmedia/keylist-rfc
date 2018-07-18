@@ -137,16 +137,19 @@
           refresh interval of less than one day, however we also RECOMMEND that client
           s allow the user to select this interval. The exact time at which updates
           are performed is not critical.</t>
-        <t>To perform an update, the client MUST perform the following steps. They SHOULD
-          be performed in the given order.</t>
+        <t>To perform an update, the client MUST perform the following steps on each
+          keylist to which it is subscribed. The steps SHOULD be performed in the
+          given order.</t>
         <t>
           <list style="numbers">
             <t>Obtain a current copy of the keylist.</t>
             <t>Obtain a current copy of the keylist's signature data.</t>
             <!-- I say 'obtain' rather than retrieve because I want to leave open the possibility of a client checking to see if the hash of the file, for example, has changed, and only re-requesting if it has. 'Obtain' is also very ambiguous, though, so it may be to our advantage to use something more specific or explain this rationale outright. ~MM -->
             <t>Verify that the keylist's signature matches the keylist data. If the
-              signature does not match, the client MUST abort the update and SHOULD
-              alert the user.
+              signature does not match, the client MUST abort the update of this
+              keylist and SHOULD alert the user. The client SHOULD NOT abort the
+              update of other keylists to which it is subscribed, unless they too
+              fail signature verification.
             </t>
             <t>For each key listed in the keyfile, either refresh it from the keyserver
               if a copy of the public key is already present in the client's local
