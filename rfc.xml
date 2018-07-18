@@ -181,12 +181,13 @@
           or an end of file (EOF). The keylist SHOULD end with a newline. The fingerprint
           MUST be the full 40-character hexadecimal public key fingerprint, as defined
           in OpenPGP Message Format [RFC4880]. Space characters (' ', U+0020) MAY
-          be included anywhere in the fingerprint.
+          be included anywhere in the fingerprint. Lines SHOULD NOT exceed 128 characters
+          in length.
         </t>
         <t>It is RECOMMENDED that keylist maintainers describe each key using a comment,
-          for example: 1326 CB16 2C69 21BF 085F 8459 F3C7 8280 DDBF 52A1 # R. Miles
-          McCain &lt;0@rmrm.io&gt;
-        </t>
+          for example:</t>
+        <t>1326 CB16 2C69 21BF 085F 8459 F3C7 8280 DDBF 52A1 # Miles' Key</t>
+        <!-- TODO: there must be better notation for this... ~MM -->
         <t>To extract the public key fingerprints from a keylist, a client SHOULD perform
           the following steps, in order:</t>
         <t>
