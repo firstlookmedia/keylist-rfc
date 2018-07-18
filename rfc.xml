@@ -172,24 +172,38 @@
              title="Data Element Formats">
       <!-- TODO -->
       <section anchor="terms"
-               title="Keylist File">
-        <t>The keylist file MUST be encoded in UTF-8. Each line MUST begin either with
-          a comment, a public key fingerprint, or whitespace. A comment is defined
+               title="Keylist">
+        <t>The keylist MUST be encoded in UTF-8. Each line MUST begin either with a
+          comment, a public key fingerprint, or whitespace. A comment is defined
           as a string of characters between a hash symbol (#, u0023) and a newline
-          or an end of file (EOF). The file SHOULD end with a newline.
+          or an end of file (EOF). The keylist SHOULD end with a newline. The fingerprint
+          MUST be the full 40-character hexadecimal public key fingerprint, as defined
+          in OpenPGP Message Format [RFC4880]. Space characters (' ', u0020) MAY
+          be included anywhere in the fingerprint.
         </t>
-
+        <t>It is RECOMMENDED that keylist maintainers describe each key using a comment,
+          for example: 1326 CB16 2C69 21BF 085F 8459 F3C7 8280 DDBF 52A1 # R. Miles
+          McCain &lt;0@rmrm.io&gt;
+        </t>
+        <t>To extract the public key fingerprints from a keylist, a client SHOULD perform
+          the following steps, in order:</t>
+        <t>
+          <list style="numbers">
+            <t>Strip the keylist of all comments, as defined above, including the preceding
+              hash symbol but excluding the trailing newline.</t>
+            <t>Strip the keylist of all non-breaking whitespace.</t>
+          </list>
+        </t>
+        <t>Performing these steps will result in one public key fingerprint per line.</t>
         <!-- TODO: find the way to properly define unicode ~MM -->
-        <!-- newline, whitespace, starts with #, starts with fingerprint -->
+        <!-- TODO: call it a file? Don't call it a file? What is the best path? It's an internet resource. ~MM -->
+        <!-- TODO: adopt 'nonbreaking whitespace'/a citation from the Unicode RFC. -->
       </section>
       <section anchor="sigfile"
-               title="Signature File">
-        <!-- TODO -->
+               title="Signature">
+        <t>The signature file MUST be a 'detached signature' of the keylist file, as
+          defined in OpenPGP Message Format [RFC4880].</t>
       </section>
-    </section>
-    <section anchor="retrieval"
-             title="Data Retrieval">
-      <!-- TODO -->
     </section>
     <!-- ... body text ... -->
     <section anchor="securityconsiderations"
