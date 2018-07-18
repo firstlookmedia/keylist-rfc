@@ -173,7 +173,14 @@
       <!-- TODO -->
       <section anchor="terms"
                title="Keylist File">
-        <!-- TODO -->
+        <t>The keylist file MUST be encoded in UTF-8. Each line MUST begin either with
+          a comment, a public key fingerprint, or whitespace. A comment is defined
+          as a string of characters between a hash symbol (#, u0023) and a newline
+          or an end of file (EOF). The file SHOULD end with a newline.
+        </t>
+
+        <!-- TODO: find the way to properly define unicode ~MM -->
+        <!-- newline, whitespace, starts with #, starts with fingerprint -->
       </section>
       <section anchor="sigfile"
                title="Signature File">
