@@ -116,12 +116,12 @@
           the keylist. Keylist subscriptions SHOULD be persistent--that is, they
           should be permanently stored by the client to enable future automatic updates.
         </t>
-        <t>To subscribe to a keylist, the client must be aware of the keylist URI, the
-          keylist's signature URI, and the fingerprint of the authority key used
+        <t>To subscribe to a keylist, the client must be aware of the keylist URI [RFC3986],
+          the keylist's signature URI, and the fingerprint of the authority key used
           to sign the keylist. The protocol used to retrieve the keylist and its
           signature SHOULD be HTTPS, however other implementation are possible. A
           client implementing keylist functionality MUST support the retrieval of
-          keylists and signatures over HTTPS, but no other protocols are required.</t>
+          keylists and signatures over HTTPS. All other protocols are OPTIONAL.</t>
         <t>An client MUST NOT employ a trust-on-first-use model for determining the
           fingerprint of the authority key; it must be explicitly provided by the
           user.
