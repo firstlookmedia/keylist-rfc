@@ -225,16 +225,20 @@
                title="Security Benefits">
         <t>The keylist subscription functionality defined in this document provide a
           number of security benefits, including:</t>
-        <list style="symbols">
-          <t>The ability for new keys to be quickly distributed across an organization.</t>
-          <t>The ability for an organization to prevent the spread of falsely attributed
-            keys by centralizing the public key discovery process within their organization.</t>
-          <!-- TODO: others? ~MM -->
-        </list>
+        <t>
+          <list style="symbols">
+            <t>The ability for new keys to be quickly distributed across an organization.</t>
+            <t>The ability for an organization to prevent the spread of falsely attributed
+              keys by centralizing the public key discovery process within their
+              organization.
+            </t>
+            <!-- TODO: others? ~MM -->
+          </list>
+        </t>
       </section>
       <section anchor="securitydrawbacks"
                title="Security Drawbacks">
-        <t>There are certain situations in which keylist subscriptions can pose a potential
+        <t>There is a situation in which keylist subscriptions could pose a potential
           security threat. If the authority key and the keylist distribution system
           were to both be compromised, it would be possible for an attacker to distribute
           false keys. We believe, however, that the security benefits of this system
