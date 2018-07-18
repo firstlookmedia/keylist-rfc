@@ -80,6 +80,7 @@
         <t>This document uses the terms "OpenPGP", "public key", "private key", "signature",
           "keystore", and "fingerprint" as defined by OpenPGP Message Format [RFC4880].
         </t>
+        <!-- TODO: add unicode definitions. ~MM -->
         <!-- TODO: verify that all the previous terms are actually defined in RFC4880. ~MM -->
         <!-- TODO: does 'URI' and 'Internet' need a citation? Probably not, but we should check. ~MM -->
         <t>The term "keylist" is defined as a list of OpenPGP public keys identified
