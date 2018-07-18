@@ -207,7 +207,6 @@
           defined in OpenPGP Message Format [RFC4880].</t>
       </section>
     </section>
-    <!-- ... body text ... -->
     <section anchor="securityconsiderations"
              title="Security Considerations">
       <section anchor="securitybenefits"
@@ -218,7 +217,8 @@
           <t>The ability for new keys to be quickly distributed across an organization.</t>
           <t>The ability for an organization to prevent the spread of falsely attributed
             keys by centralizing the public key discovery process within their organization.</t>
-          <!-- others? -->
+          <!-- TODO: others? ~MM -->
+        </list>
       </section>
       <section anchor="securitydrawbacks"
                title="Security Drawbacks">
@@ -228,11 +228,8 @@
           false keys. We believe, however, that the security benefits of this system
           strongly outweigh the drawbacks.</t>
       </section>
-      <t>
-        <!-- TODO, see https://tools.ietf.org/html/bcp72 -->
-      </t>
+      <!-- TODO, see https://tools.ietf.org/html/bcp72 ~MM -->
     </section>
-    <!-- TODO: other elements -->
   </middle>
   <back></back>
 </rfc>
