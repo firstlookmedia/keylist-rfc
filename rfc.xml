@@ -15,9 +15,10 @@
   <front>
     <!-- Working title. We'll want something that more accurately frames the system before we submit. It never also hurts to have a more catchy title... -->
     <title abbrev="OpenPGP Keylist Subscriptions">
-      Safely Distributing OpenPGP Keys with Keylist Subscriptions
+      Distributing OpenPGP Keys with Signed Keylist Subscriptions
     </title>
     <!-- I don't care about the order of authors. Note that IETF consisters all named authors to have contributed equally. Feel free to reorder if you'd like. -->
+    <!-- You should go first! You're doing most of the work. ~ML -->
     <author initials="M.M."
             surname="McCain"
             fullname="R. Miles McCain">
@@ -29,7 +30,7 @@
     </author>
     <author initials="M.L."
             surname="Lee"
-            fullname="Micah F. Lee">
+            fullname="Micah Lee">
       <organization abbrev="TI">The Intercept</organization>
       <address>
         <email>micah.lee@theintercept.com</email>
@@ -40,6 +41,7 @@
           year="2018" />
     <area>Security</area>
     <!-- Given that 'key management' is listed as a critical category of the 'Security' area, I believe that this I-D is best suited for the 'Security' area. ~MM -->
+    <!-- Agreed. ~ML -->
     <keyword>OpenPGP</keyword>
     <keyword>GPGSync</keyword>
     <keyword>GPG</keyword>
@@ -88,11 +90,13 @@
           data is specified in "Data Element Formats".</t>
         <!-- TODO: find out how to hyperlink sections. ~ MM -->
         <!-- TODO: I avoid using the word 'file' here as it has a nuanced meaning and really we're just talking about data accessible via a URI. Is there a term other than 'data' that is appropriate here? ~MM -->
-        <t>An "authority key" is defined as the OpenPGP used to sign a particular keylist.
-          Every keylist has a corresponding authority key, and every authority key
-          has at least one corresponding keylist. For security purposes, a single
-          authority key SHOULD NOT be used to sign multiple keylists.
+        <t>An "authority key" is defined as the OpenPGP secret key used to sign a
+          particular keylist. Every keylist has a corresponding authority key, and
+          every authority key has at least one corresponding keylist. For security
+          purposes, a single authority key SHOULD NOT be used to sign multiple
+          keylists.
         </t>
+        <!-- I'm not opposed to it, but why shouldn't the same authority key be used to sign multiple keylists? I think it'd be confusing in the UI in GPG Sync if you do this, because they keylist is displayed by the authority key's UID. But from a security standpoint, it should be probably be just as secure. ~ML -->
         <t>To be "subscribed" to a keylist means that a program will retreive that keylist
           on a regular interval and subsequently perform an update to an internal
           OpenPGP keystore.</t>
@@ -111,7 +115,7 @@
       </t>
       <section anchor="keylist-subscribe"
                title="Subscribing to Keylists">
-        <t>A single client may subscribe to any number of keylists. When an client first
+        <t>A single client may subscribe to any number of keylists. When a client first
           subscribes to a keylist, it SHOULD update or import every key present in
           the keylist. Keylist subscriptions SHOULD be persistent--that is, they
           should be permanently stored by the client to enable future automatic updates.
@@ -122,20 +126,20 @@
           signature SHOULD be HTTPS, however other implementation are possible. A
           client implementing keylist functionality MUST support the retrieval of
           keylists and signatures over HTTPS. All other protocols are OPTIONAL.</t>
-        <t>An client MUST NOT employ a trust-on-first-use model for determining the
+        <t>A client MUST NOT employ a trust-on-first-use model for determining the
           fingerprint of the authority key; it must be explicitly provided by the
           user.
         </t>
-        <t>The process by which the client stores its keylist subscriptions to a keylist
-          is out of scope, as is the means by which subscription functionality is
+        <t>The process by which the client stores its keylist subscriptions is
+          out of scope, as is the means by which subscription functionality is
           exposed to the end-user.</t>
       </section>
       <section anchor="keylist-update"
                title="Periodic Updates">
         <t>The primary purpose of keylists is to enable periodic updates of OpenPGP
           clients' internal keystores. We RECOMMEND that clients provide a default
-          refresh interval of less than one day, however we also RECOMMEND that client
-          s allow the user to select this interval. The exact time at which updates
+          refresh interval of less than one day, however we also RECOMMEND that clients
+          allow the user to select this interval. The exact time at which updates
           are performed is not critical.</t>
         <t>To perform an update, the client MUST perform the following steps on each
           keylist to which it is subscribed. The steps SHOULD be performed in the
@@ -145,16 +149,20 @@
             <t>Obtain a current copy of the keylist.</t>
             <t>Obtain a current copy of the keylist's signature data.</t>
             <!-- I say 'obtain' rather than retrieve because I want to leave open the possibility of a client checking to see if the hash of the file, for example, has changed, and only re-requesting if it has. 'Obtain' is also very ambiguous, though, so it may be to our advantage to use something more specific or explain this rationale outright. ~MM -->
-            <t>Verify that the keylist's signature matches the keylist data. If the
-              signature does not match, the client MUST abort the update of this
-              keylist and SHOULD alert the user. The client SHOULD NOT abort the
-              update of other keylists to which it is subscribed, unless they too
-              fail signature verification.
+            <t>Using the keylist and the keylist's signature, cryptographically verify
+              that the keylist was signed using the authority key. If the signature does
+              not verify, the client MUST abort the update of this keylist and SHOULD
+              alert the user. The client SHOULD NOT abort the update of other keylists
+              to which it is subscribed, unless they too fail signature verification.
             </t>
-            <t>For each key listed in the keyfile, either refresh it from the keyserver
-              if a copy of the public key is already present in the client's local
-              keystore or retrieve it from the keyserver if it is not already present.
-              The method by which keys are retrieved and updated is out of scope.</t>
+            <t>Validate the format of the keylist. If the keylist is in an invalid format,
+              the client MUST abort the update this keylist and SHOULD alert the user.</t>
+            <!-- TODO: Add link to Data Element Formats. Not sure how links work yet :) ~ML -->
+            <t>For each fingerprint listed in the keyfile, if a copy of the associated
+              public key is not present in the client's local keystore, retrieve it from
+              a keyserver. If it is already present and not revoked, refresh it from a
+              keyserver. If it is present and revoked, ignore it. The method by which
+              keys are retrieved and updated is out of scope.</t>
             <!-- TODO: Is it overkill to establish some concept of a 'linked keystore' as the keystore that the client interacts with and keeps updated? This is a potential ambiguity for machines with multiple keystores. ~MM -->
             <!-- TODO: Should anything else be in this list? ~MM -->
           </list>
@@ -164,10 +172,12 @@
                title="Cryptographic Verification of Keylists">
         <t>To ensure authenticity of a keylist during an update, the client MUST verify
           that the keylist's data matches its cryptographic signature, and that the
-          public key used to verify the signature matches the fingerprint given by
-          the user.</t>
+          public key used to verify the signature matches the authority key fingerprint
+          given by the user.</t>
         <t>For enhanced security, it is RECOMMENDED that keylist operators sign each
-          public key listed in their keylist with the authority private key.</t>
+          public key listed in their keylist with the authority private key. This way,
+          an organization can have an internal trust relationship without requiring
+          members of the organization to certify each other's public keys.</t>
       </section>
     </section>
     <section anchor="formats"
@@ -188,6 +198,7 @@
           for example:</t>
         <t>1326 CB16 2C69 21BF 085F 8459 F3C7 8280 DDBF 52A1 # Miles' Key</t>
         <!-- TODO: there must be better notation for this... ~MM -->
+        <!-- TODO: I'm actually ambivalent about this recommendation. I think fingerprints without spaces are just as good -- in the end, the point of the keylist is to be machine readable more than human readable anyway. ~ML -->
         <t>To extract the public key fingerprints from a keylist, a client SHOULD perform
           the following steps, in order:</t>
         <t>
@@ -200,23 +211,24 @@
         <t>Performing these steps will result in one public key fingerprint per line.</t>
         <!-- TODO: find the way to properly define unicode ~MM -->
         <!-- TODO: call it a file? Don't call it a file? What is the best path? It's an internet resource. ~MM -->
+        <!-- I say let's keep the wording you have and show it to others, and see their thoughts on calling it a "file". ~ML -->
         <!-- TODO: adopt 'nonbreaking whitespace'/a citation from the Unicode RFC. -->
       </section>
       <section anchor="sigfile"
                title="Signature">
         <t>The signature file MUST be a 'detached signature' of the keylist file, as
           defined in OpenPGP Message Format [RFC4880].</t>
+          <!-- TODO: Should we specify ASCII armored or not? At the moment, GPG Sync doesn't ASCII-armor the signature file, and it's a .sig, however I see no probably with using an ASCII-armored .asc file instead (and of course, I don't think there's any reason to require specific file extensions. It's just a URI after all, and this way you can choose to host the keylist and sig in, for example, github gists.) -->
       </section>
     </section>
     <section anchor="inpractice"
              title="In Practice">
-      <t>GPGSync, an open source program created by one of the authors, implements this
-        experimental standard. GPGSync is used by First Look Media, The Intercept,
-        and the Freedom of the Press Foundation to keep OpenPGP keys in sync across
-        their organizations, as well as to publish their employee's OpenPGP keys
-        to the world. These organizations collectively employ more than 200 people
-        and have used the system described in this document successfully for the
-        past two years.</t>
+      <t>GPG Sync, an open source program created by one of the authors, implements this
+        experimental standard. GPG Sync is used by First Look Media and the Freedom of
+        the Press Foundation to keep OpenPGP keys in sync across their organizations,
+        as well as to publish their employee's OpenPGP keys to the world. These
+        organizations collectively employ more than 200 people and have used the
+        system described in this document successfully for years.</t>
       <!-- TODO: clunky. We could clean this. ~MM -->
     </section>
     <section anchor="securityconsiderations"
@@ -228,6 +240,9 @@
         <t>
           <list style="symbols">
             <t>The ability for new keys to be quickly distributed across an organization.</t>
+            <t>It removes the complexity of key distribution from end users, allowing
+              them to focus on the content of their communications rather than on key
+              management.</t>
             <t>The ability for an organization to prevent the spread of falsely attributed
               keys by centralizing the public key discovery process within their
               organization.
