@@ -17,8 +17,6 @@
     <title abbrev="OpenPGP Keylist Subscriptions">
       Distributing OpenPGP Keys with Signed Keylist Subscriptions
     </title>
-    <!-- I don't care about the order of authors. Note that IETF consisters all named authors to have contributed equally. Feel free to reorder if you'd like. -->
-    <!-- You should go first! You're doing most of the work. ~ML -->
     <author initials="M.M."
             surname="McCain"
             fullname="R. Miles McCain">
