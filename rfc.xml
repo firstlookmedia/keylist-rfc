@@ -214,9 +214,10 @@
       </section>
       <section anchor="sigfile"
                title="Signature">
-        <t>The signature file MUST be a 'detached signature' of the keylist file, as
-          defined in OpenPGP Message Format [RFC4880].</t>
-        <!-- TODO: Should we specify ASCII armored or not? At the moment, GPG Sync doesn't ASCII-armor the signature file, and it's a .sig, however I see no probably with using an ASCII-armored .asc file instead (and of course, I don't think there's any reason to require specific file extensions. It's just a URI after all, and this way you can choose to host the keylist and sig in, for example, github gists.) -->
+        <t>The signature file MUST be an ASCII-armored 'detached signature' of the keylist
+          file, as defined in OpenPGP Message Format [RFC4880].</t>
+        <!-- TODO: Should we specify ASCII armored or not? At the moment, GPG Sync doesn't ASCII-armor the signature file, and it's a .sig, however I see no probably with using an ASCII-armored .asc file instead (and of course, I don't think there's any reason to require specific file extensions. It's just a URI after all, and this way you can choose to host the keylist and sig in, for example, github gists.) ~ML -->
+        <!-- RESOLVED; I added language that specified ascii-armored. For all the reasons you specify, I think this is the best option. ~MM -->
       </section>
     </section>
     <section anchor="inpractice"
