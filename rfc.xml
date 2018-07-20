@@ -38,8 +38,6 @@
     <date month="July"
           year="2018" />
     <area>Security</area>
-    <!-- Given that 'key management' is listed as a critical category of the 'Security' area, I believe that this I-D is best suited for the 'Security' area. ~MM -->
-    <!-- Agreed. ~ML -->
     <keyword>OpenPGP</keyword>
     <keyword>GPGSync</keyword>
     <keyword>GPG</keyword>
