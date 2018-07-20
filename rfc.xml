@@ -88,10 +88,11 @@
         <!-- TODO: I avoid using the word 'file' here as it has a nuanced meaning and really we're just talking about data accessible via a URI. Is there a term other than 'data' that is appropriate here? ~MM -->
         <t>An "authority key" is defined as the OpenPGP secret key used to sign a particular
           keylist. Every keylist has a corresponding authority key, and every authority
-          key has at least one corresponding keylist. For security purposes, a single
-          authority key SHOULD NOT be used to sign multiple keylists.
+          key has at least one corresponding keylist. A single authority key SHOULD
+          NOT be used to sign multiple keylists.
         </t>
         <!-- I'm not opposed to it, but why shouldn't the same authority key be used to sign multiple keylists? I think it'd be confusing in the UI in GPG Sync if you do this, because they keylist is displayed by the authority key's UID. But from a security standpoint, it should be probably be just as secure. ~ML -->
+        <!-- I removed the reference to security. One potential consideration, though, is that this sentence is less about the spec and more about the end user. Perhaps we should just remove the reference alltogether because it doesn't fit into the implementation but rather the end user's habits? Could be a point of criticism. ~MM -->
         <t>To be "subscribed" to a keylist means that a program will retreive that keylist
           on a regular interval and subsequently perform an update to an internal
           OpenPGP keystore.</t>
