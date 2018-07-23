@@ -83,8 +83,8 @@
         <!-- TODO: does 'URI' and 'Internet' need a citation? Probably not, but we should check. ~MM -->
         <t>The term "keylist" is defined as a list of OpenPGP public keys identified
           by their fingerprints and accessible via a URI. The exact format of this
-          data is specified in "Data Element Formats".</t>
-        <!-- TODO: find out how to hyperlink sections. ~ MM -->
+          data is specified in
+          <xref target='formats' />.</t>
         <!-- TODO: I avoid using the word 'file' here as it has a nuanced meaning and really we're just talking about data accessible via a URI. Is there a term other than 'data' that is appropriate here? ~MM -->
         <t>An "authority key" is defined as the OpenPGP secret key used to sign a particular
           keylist. Every keylist has a corresponding authority key, and every authority
@@ -151,11 +151,10 @@
               keylists to which it is subscribed, unless they too fail signature
               verification.
             </t>
-            <t>Validate the format of the keylist. If the keylist is in an invalid format,
-              the client MUST abort the update this keylist and SHOULD alert the
-              user.
+            <t>Validate the format of the keylist according to
+              <xref target="formats" />. If the keylist is in an invalid format, the client MUST abort the
+              update this keylist and SHOULD alert the user.
             </t>
-            <!-- TODO: Add link to Data Element Formats. Not sure how links work yet :) ~ML -->
             <t>For each fingerprint listed in the keyfile, if a copy of the associated
               public key is not present in the client's local keystore, retrieve
               it from a keyserver. If it is already present and not revoked, refresh
