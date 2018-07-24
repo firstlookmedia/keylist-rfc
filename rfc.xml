@@ -214,6 +214,7 @@
         <!-- TODO: call it a file? Don't call it a file? What is the best path? It's an internet resource. ~MM -->
         <!-- I say let's keep the wording you have and show it to others, and see their thoughts on calling it a "file". ~ML -->
         <!-- TODO: adopt 'nonbreaking whitespace'/a citation from the Unicode RFC. ~MM -->
+        <!-- TODO: ^ ask if the above is necessary, and if so, figure out how to do it. ~MM -->
       </section>
       <section anchor="sigfile"
                title="Signature">
