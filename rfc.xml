@@ -35,6 +35,15 @@
         <uri>https://micahflee.com/</uri>
       </address>
     </author>
+    <author initials="N.D.W."
+            surname="Welch"
+            fullname="Nat Welch">
+      <organization abbrev="FLM">First Look Media</organization>
+      <address>
+        <email>nat.welch@firstlook.media</email>
+        <uri>https://natwelch.com</uri>
+      </address>
+    </author>
     <date month="July"
           year="2018" />
     <area>Security</area>
@@ -87,16 +96,17 @@
           data is specified in
           <xref target='formats' />.</t>
         <!-- TODO: I avoid using the word 'file' here as it has a nuanced meaning and really we're just talking about data accessible via a URI. Is there a term other than 'data' that is appropriate here? ~MM -->
+        <!-- I think this is fine. ~NW -->
         <t>An "authority key" is defined as the OpenPGP secret key used to sign a particular
           keylist. Every keylist has a corresponding authority key, and every authority
           key has at least one corresponding keylist. A single authority key SHOULD
           NOT be used to sign multiple keylists.
         </t>
         <!-- I'm not opposed to it, but why shouldn't the same authority key be used to sign multiple keylists? I think it'd be confusing in the UI in GPG Sync if you do this, because they keylist is displayed by the authority key's UID. But from a security standpoint, it should be probably be just as secure. ~ML -->
-        <!-- I removed the reference to security. One potential consideration, though, is that this sentence is less about the spec and more about the end user. Perhaps we should just remove the reference alltogether because it doesn't fit into the implementation but rather the end user's habits? Could be a point of criticism. ~MM -->
+        <!-- I removed the reference to security. One potential consideration, though, is that this sentence is less about the spec and more about the end user. Perhaps we should just remove the reference all together because it doesn't fit into the implementation but rather the end user's habits? Could be a point of criticism. ~MM -->
         <t>To be "subscribed" to a keylist means that a program will retreive that keylist
-          on a regular interval and subsequently perform an update to an internal
-          OpenPGP keystore.</t>
+          on a regular interval. After retrieval, that program will perform an update to
+          an internal OpenPGP keystore.</t>
         <!-- TODO: This needs to be cleaned/tightened. ~MM -->
         <t>A "client" is a program that allows the user to subscribe to keylists. A
           client may be an OpenPGP client itself or a separate program that interfaces
@@ -114,8 +124,9 @@
                title="Subscribing to Keylists">
         <t>A single client may subscribe to any number of keylists. When a client first
           subscribes to a keylist, it SHOULD update or import every key present in
-          the keylist. Keylist subscriptions SHOULD be persistent--that is, they
-          should be permanently stored by the client to enable future automatic updates.
+          the keylist into its local keystore. Keylist subscriptions SHOULD be persistent
+          --that is, they should be permanently stored by the client to enable
+          future automatic updates.
         </t>
         <t>To subscribe to a keylist, the client must be aware of the keylist URI [RFC3986],
           the keylist's signature URI, and the fingerprint of the authority key used
@@ -145,6 +156,7 @@
             <t>Obtain a current copy of the keylist.</t>
             <t>Obtain a current copy of the keylist's signature data.</t>
             <!-- I say 'obtain' rather than retrieve because I want to leave open the possibility of a client checking to see if the hash of the file, for example, has changed, and only re-requesting if it has. 'Obtain' is also very ambiguous, though, so it may be to our advantage to use something more specific or explain this rationale outright. ~MM -->
+            <!-- we should be verifying a checksum, and be explicit about it in this description. ~NW -->
             <t>Using the keylist and the keylist's signature, cryptographically verify
               that the keylist was signed using the authority key. If the signature
               does not verify, the client MUST abort the update of this keylist and
@@ -162,6 +174,7 @@
               it from a keyserver. If it is present and revoked, ignore it. The method
               by which keys are retrieved and updated is out of scope.</t>
             <!-- TODO: Is it overkill to establish some concept of a 'linked keystore' as the keystore that the client interacts with and keeps updated? This is a potential ambiguity for machines with multiple keystores. ~MM -->
+            <!-- That could be useful, but I'd leave that up to the client. Maybe add a recommendation that says something around letting users specify which keystore they want to sync to? It seems slightly out of scope as you are saying retrival and update is out of scope. ~NW -->
             <!-- TODO: Should anything else be in this list? ~MM -->
           </list>
         </t>
@@ -180,7 +193,10 @@
     </section>
     <section anchor="formats"
              title="Data Element Formats">
-      <!-- TODO -->
+      <t>The following are definitions of the data types we will be creating to
+        support this new feature set.
+      </t>
+
       <section anchor="terms"
                title="Keylist">
         <t>The keylist MUST be encoded in UTF-8. Each line MUST begin either with a
@@ -199,6 +215,7 @@
           <artwork> 1326 CB16 2C69 21BF 085F 8459 F3C7 8280 DDBF 52A1 # Miles' Key</artwork>
         </figure>
         <!-- TODO: there must be better notation for this... ~MM -->
+        <!--   In v3, there is <sourcecode> ~NW -->
         <!-- TODO: I'm actually ambivalent about this recommendation. I think fingerprints without spaces are just as good - in the end, the point of the keylist is to be machine readable more than human readable anyway. ~ML -->
         <!--       ^ I was mostly referring to my use of the `<t>` tag for example notation. :) ~MM -->
         <t>To extract the public key fingerprints from a keylist, a client SHOULD perform
@@ -232,7 +249,9 @@
         Freedom of the Press Foundation to keep OpenPGP keys in sync across their
         organizations, as well as to publish their employee's OpenPGP keys to the
         world. These organizations collectively employ more than 200 people and have
-        used the system described in this document successfully for years.</t>
+        used the system described in this document successfully for multiple years.</t>
+      <t>GPG Sync's existing code can be found at https://github.com/firstlookmedia/gpgsync</t>
+      <t>First Look Media's keylist file can be found at https://github.com/firstlookmedia/gpgsync-firstlook-fingerprints</t>
       <!-- TODO: clunky. We could clean this. ~MM -->
     </section>
     <section anchor="securityconsiderations"
@@ -263,6 +282,7 @@
           were to both be compromised, it would be possible for an attacker to distribute
           false keys. We believe, however, that the security benefits of this system
           strongly outweigh the drawbacks.</t>
+        <t>If users do not run the client on a regular basis, there is the possibility of users becomming just as out of sync as if they were not using any syncronization service at all.</t>
       </section>
       <!-- TODO, see https://tools.ietf.org/html/bcp72 ~MM -->
     </section>
