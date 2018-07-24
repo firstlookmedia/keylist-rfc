@@ -12,6 +12,7 @@
      category="exp">
   <!-- TODO: We should verify that 'trust200902' is the intellectual property designation we want. ~MM -->
   <!-- TODO: figure out which category this goes in. ~MM -->
+  <!-- TODO: cite HTTP(S)! -->
   <front>
     <!-- Working title. We'll want something that more accurately frames the system before we submit. It never also hurts to have a more catchy title... -->
     <title abbrev="OpenPGP Keylist Subscriptions">
