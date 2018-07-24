@@ -45,11 +45,12 @@
     <abstract>
       <t>This document specifies a system by which clients may subscribe to an organization's
         keylist to keep its internal OpenPGP keystore up-to-date. Ensuring that all
-        members of an organization have their colleagues' most recent PGP public
-        keys is critical to maintaining operational security. To enable cross-client
-        compatibility, this document proposes a standard format for the keylist file
-        as well as feature requirements for clients who wish to implement keylist
-        subscription functionality.
+        members of an organization have their colleagues' most recent PGP public keys is
+        critical to maintaining operational security. It is critical because without the correct
+        keys, and some source verifying those keys, users need to go through the key signing
+        workflow, which is untenable in larger organizations. This document proposes a standard
+        format for the keylist file as well as requirements for clients who wish to implement
+        keylist subscription functionality.
       </t>
       <!-- We'll want to tighten this abstract up a bit... ~MM -->
     </abstract>
