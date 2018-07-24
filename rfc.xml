@@ -96,7 +96,7 @@
           data is specified in
           <xref target='formats' />.</t>
         <!-- TODO: I avoid using the word 'file' here as it has a nuanced meaning and really we're just talking about data accessible via a URI. Is there a term other than 'data' that is appropriate here? ~MM -->
-        <!-- I think this is fine. ~NW -->
+        <!-- I think this is fine. ~NDW -->
         <t>An "authority key" is defined as the OpenPGP secret key used to sign a particular
           keylist. Every keylist has a corresponding authority key, and every authority
           key has at least one corresponding keylist. A single authority key SHOULD
@@ -156,7 +156,7 @@
             <t>Obtain a current copy of the keylist.</t>
             <t>Obtain a current copy of the keylist's signature data.</t>
             <!-- I say 'obtain' rather than retrieve because I want to leave open the possibility of a client checking to see if the hash of the file, for example, has changed, and only re-requesting if it has. 'Obtain' is also very ambiguous, though, so it may be to our advantage to use something more specific or explain this rationale outright. ~MM -->
-            <!-- we should be verifying a checksum, and be explicit about it in this description. ~NW -->
+            <!-- we should be verifying a checksum, and be explicit about it in this description. ~NDW -->
             <t>Using the keylist and the keylist's signature, cryptographically verify
               that the keylist was signed using the authority key. If the signature
               does not verify, the client MUST abort the update of this keylist and
@@ -174,7 +174,7 @@
               it from a keyserver. If it is present and revoked, ignore it. The method
               by which keys are retrieved and updated is out of scope.</t>
             <!-- TODO: Is it overkill to establish some concept of a 'linked keystore' as the keystore that the client interacts with and keeps updated? This is a potential ambiguity for machines with multiple keystores. ~MM -->
-            <!-- That could be useful, but I'd leave that up to the client. Maybe add a recommendation that says something around letting users specify which keystore they want to sync to? It seems slightly out of scope as you are saying retrival and update is out of scope. ~NW -->
+            <!-- That could be useful, but I'd leave that up to the client. Maybe add a recommendation that says something around letting users specify which keystore they want to sync to? It seems slightly out of scope as you are saying retrival and update is out of scope. ~NDW -->
             <!-- TODO: Should anything else be in this list? ~MM -->
           </list>
         </t>
@@ -215,7 +215,7 @@
           <artwork> 1326 CB16 2C69 21BF 085F 8459 F3C7 8280 DDBF 52A1 # Miles' Key</artwork>
         </figure>
         <!-- TODO: there must be better notation for this... ~MM -->
-        <!--   In v3, there is <sourcecode> ~NW -->
+        <!--   In v3, there is <sourcecode> ~NDW -->
         <!-- TODO: I'm actually ambivalent about this recommendation. I think fingerprints without spaces are just as good - in the end, the point of the keylist is to be machine readable more than human readable anyway. ~ML -->
         <!--       ^ I was mostly referring to my use of the `<t>` tag for example notation. :) ~MM -->
         <t>To extract the public key fingerprints from a keylist, a client SHOULD perform
