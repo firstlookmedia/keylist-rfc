@@ -54,12 +54,12 @@
     <abstract>
       <t>This document specifies a system by which clients may subscribe to an organization's
         keylist to keep its internal OpenPGP keystore up-to-date. Ensuring that all
-        members of an organization have their colleagues' most recent PGP public keys is
-        critical to maintaining operational security. It is critical because without the correct
-        keys, and some source verifying those keys, users need to go through the key signing
-        workflow, which is untenable in larger organizations. This document proposes a standard
-        format for the keylist file as well as requirements for clients who wish to implement
-        keylist subscription functionality.
+        members of an organization have their colleagues' most recent PGP public
+        keys is critical to maintaining operational security. It is critical because
+        without the correct keys, and some source verifying those keys, users need
+        to go through the key signing workflow, which is untenable in larger organizations.
+        This document proposes a standard format for the keylist file as well as
+        requirements for clients who wish to implement keylist subscription functionality.
       </t>
       <!-- We'll want to tighten this abstract up a bit... ~MM -->
     </abstract>
@@ -105,8 +105,8 @@
         <!-- I'm not opposed to it, but why shouldn't the same authority key be used to sign multiple keylists? I think it'd be confusing in the UI in GPG Sync if you do this, because they keylist is displayed by the authority key's UID. But from a security standpoint, it should be probably be just as secure. ~ML -->
         <!-- I removed the reference to security. One potential consideration, though, is that this sentence is less about the spec and more about the end user. Perhaps we should just remove the reference all together because it doesn't fit into the implementation but rather the end user's habits? Could be a point of criticism. ~MM -->
         <t>To be "subscribed" to a keylist means that a program will retreive that keylist
-          on a regular interval. After retrieval, that program will perform an update to
-          an internal OpenPGP keystore.</t>
+          on a regular interval. After retrieval, that program will perform an update
+          to an internal OpenPGP keystore.</t>
         <!-- TODO: This needs to be cleaned/tightened. ~MM -->
         <t>A "client" is a program that allows the user to subscribe to keylists. A
           client may be an OpenPGP client itself or a separate program that interfaces
@@ -125,8 +125,8 @@
         <t>A single client may subscribe to any number of keylists. When a client first
           subscribes to a keylist, it SHOULD update or import every key present in
           the keylist into its local keystore. Keylist subscriptions SHOULD be persistent
-          --that is, they should be permanently stored by the client to enable
-          future automatic updates.
+          --that is, they should be permanently stored by the client to enable future
+          automatic updates.
         </t>
         <t>To subscribe to a keylist, the client must be aware of the keylist URI [RFC3986],
           the keylist's signature URI, and the fingerprint of the authority key used
@@ -193,8 +193,8 @@
     </section>
     <section anchor="formats"
              title="Data Element Formats">
-      <t>The following are definitions of the data types we will be creating to
-        support this new feature set.
+      <t>The following are definitions of the data types we will be creating to support
+        this new feature set.
       </t>
 
       <section anchor="terms"
@@ -282,7 +282,9 @@
           were to both be compromised, it would be possible for an attacker to distribute
           false keys. We believe, however, that the security benefits of this system
           strongly outweigh the drawbacks.</t>
-        <t>If users do not run the client on a regular basis, there is the possibility of users becoming just as out of sync as if they were not using any syncronization service at all.</t>
+        <t>If users do not run the client on a regular basis, there is the possibility
+          of users becoming just as out of sync as if they were not using any syncronization
+          service at all.</t>
       </section>
       <!-- TODO, see https://tools.ietf.org/html/bcp72 ~MM -->
     </section>
