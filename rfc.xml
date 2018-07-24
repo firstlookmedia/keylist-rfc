@@ -192,10 +192,14 @@
           in length.
         </t>
         <t>It is RECOMMENDED that keylist maintainers describe each key using a comment,
-          for example:</t>
-        <t>1326 CB16 2C69 21BF 085F 8459 F3C7 8280 DDBF 52A1 # Miles' Key</t>
+          for example:
+        </t>
+        <figure>
+          <artwork> 1326 CB16 2C69 21BF 085F 8459 F3C7 8280 DDBF 52A1 # Miles' Key</artwork>
+        </figure>
         <!-- TODO: there must be better notation for this... ~MM -->
         <!-- TODO: I'm actually ambivalent about this recommendation. I think fingerprints without spaces are just as good - in the end, the point of the keylist is to be machine readable more than human readable anyway. ~ML -->
+        <!--       ^ I was mostly referring to my use of the `<t>` tag for example notation. :) ~MM -->
         <t>To extract the public key fingerprints from a keylist, a client SHOULD perform
           the following steps, in order:</t>
         <t>
