@@ -1,15 +1,11 @@
 <?xml version="1.0"?>
-<!--
 <?rfc toc="yes"?>
 <?rfc symrefs="yes"?>
 <?rfc sortrefs="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
--->
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd">
-<rfc ipr="trust200902"
-     docName="draft-mccain-keylist-00"
-     category="exp">
+<rfc ipr="trust200902" docName="draft-mccain-keylist-00" category="exp">
   <!-- TODO: We should verify that 'trust200902' is the intellectual property designation we want. ~MM -->
   <!-- TODO: figure out which category this goes in. ~MM -->
   <!-- TODO: cite HTTP(S)! -->
@@ -18,35 +14,28 @@
     <title abbrev="OpenPGP Keylist Subscriptions">
       Distributing OpenPGP Keys with Signed Keylist Subscriptions
     </title>
-    <author initials="M.M."
-            surname="McCain"
-            fullname="R. Miles McCain">
+    <author initials="M.M." surname="McCain" fullname="R. Miles McCain">
       <organization abbrev="FLM">First Look Media</organization>
       <address>
         <email>ietf@sendmiles.email</email>
         <uri>https://rmrm.io</uri>
       </address>
     </author>
-    <author initials="M.L."
-            surname="Lee"
-            fullname="Micah Lee">
+    <author initials="M.L." surname="Lee" fullname="Micah Lee">
       <organization abbrev="TI">The Intercept</organization>
       <address>
         <email>micah.lee@theintercept.com</email>
         <uri>https://micahflee.com/</uri>
       </address>
     </author>
-    <author initials="N.D.W."
-            surname="Welch"
-            fullname="Nat Welch">
+    <author initials="N.D.W." surname="Welch" fullname="Nat Welch">
       <organization abbrev="FLM">First Look Media</organization>
       <address>
         <email>nat.welch@firstlook.media</email>
         <uri>https://natwelch.com</uri>
       </address>
     </author>
-    <date month="July"
-          year="2018" />
+    <date month="July" year="2018" />
     <area>Security</area>
     <keyword>OpenPGP</keyword>
     <keyword>GPGSync</keyword>
@@ -66,8 +55,7 @@
     </abstract>
   </front>
   <middle>
-    <section anchor="intro"
-             title="Introduction">
+    <section anchor="intro" title="Introduction">
       <t>This document specifies a system by which clients may subscribe to cryptographically
         signed keylists. This system allows for seamless key rotation across entire
         organizations and enhances operational security. To enable cross-client compatibility,
@@ -77,15 +65,13 @@
         is out of scope, as is the process by which the client retrieves public keys.
         Other non-security-related implementation details are also out of scope.
       </t>
-      <section anchor="notation"
-               title="Requirements Notation">
+      <section anchor="notation" title="Requirements Notation">
         <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
           "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are
           to be interpreted as described in [RFC2119].
         </t>
       </section>
-      <section anchor="terminology"
-               title="Terminology">
+      <section anchor="terminology" title="Terminology">
         <t>This document uses the terms "OpenPGP", "public key", "private key", "signature",
           "keystore", and "fingerprint" as defined by OpenPGP Message Format [RFC4880].
         </t>
@@ -95,7 +81,8 @@
         <t>The term "keylist" is defined as a list of OpenPGP public keys identified
           by their fingerprints and accessible via a URI. The exact format of this
           data is specified in
-          <xref target='formats' />.</t>
+          <xref target='formats' />
+.</t>
         <!-- TODO: I avoid using the word 'file' here as it has a nuanced meaning and really we're just talking about data accessible via a URI. Is there a term other than 'data' that is appropriate here? ~MM -->
         <!-- I think this is fine. ~NDW -->
         <t>An "authority key" is defined as the OpenPGP secret key used to sign a particular
@@ -114,15 +101,13 @@
           with an OpenPGP client to update its keystore.</t>
       </section>
     </section>
-    <section anchor="functions"
-             title="Functions and Procedures">
+    <section anchor="functions" title="Functions and Procedures">
       <t>As new keys are created and other keys are revoked, it is critical that all
         members of an organization have the most recent set of keys available on
         their computers. Keylists enable organizations to publish a directory of
         OpenPGP keys that clients can use to keep their internal keystores up-to-date.
       </t>
-      <section anchor="keylist-subscribe"
-               title="Subscribing to Keylists">
+      <section anchor="keylist-subscribe" title="Subscribing to Keylists">
         <t>A single client may subscribe to any number of keylists. When a client first
           subscribes to a keylist, it SHOULD update or import every key present in
           the keylist into its local keystore. Keylist subscriptions SHOULD be persistent
@@ -142,8 +127,7 @@
           scope, as is the means by which subscription functionality is exposed to
           the end-user.</t>
       </section>
-      <section anchor="keylist-update"
-               title="Periodic Updates">
+      <section anchor="keylist-update" title="Periodic Updates">
         <t>The primary purpose of keylists is to enable periodic updates of OpenPGP
           clients' internal keystores. We RECOMMEND that clients provide a default
           refresh interval of less than one day, however we also RECOMMEND that clients
@@ -166,7 +150,8 @@
               verification.
             </t>
             <t>Validate the format of the keylist according to
-              <xref target="formats" />. If the keylist is in an invalid format, the client MUST abort the
+              <xref target="formats" />
+. If the keylist is in an invalid format, the client MUST abort the
               update this keylist and SHOULD alert the user.
             </t>
             <t>For each fingerprint listed in the keyfile, if a copy of the associated
@@ -180,8 +165,7 @@
           </list>
         </t>
       </section>
-      <section anchor="keylist-crypto"
-               title="Cryptographic Verification of Keylists">
+      <section anchor="keylist-crypto" title="Cryptographic Verification of Keylists">
         <t>To ensure authenticity of a keylist during an update, the client MUST verify
           that the keylist's data matches its cryptographic signature, and that the
           public key used to verify the signature matches the authority key fingerprint
@@ -192,14 +176,12 @@
           members of the organization to certify each other's public keys.</t>
       </section>
     </section>
-    <section anchor="formats"
-             title="Data Element Formats">
+    <section anchor="formats" title="Data Element Formats">
       <t>The following are definitions of the data types we will be creating to support
         this new feature set.
       </t>
 
-      <section anchor="terms"
-               title="Keylist">
+      <section anchor="terms" title="Keylist">
         <t>The keylist MUST be encoded in UTF-8. Each line MUST begin either with a
           comment, a public key fingerprint, or whitespace. A comment is defined
           as a string of characters between a hash symbol (#, U+0023) and a newline
@@ -235,16 +217,14 @@
         <!-- TODO: adopt 'nonbreaking whitespace'/a citation from the Unicode RFC. ~MM -->
         <!-- TODO: ^ ask if the above is necessary, and if so, figure out how to do it. ~MM -->
       </section>
-      <section anchor="sigfile"
-               title="Signature">
+      <section anchor="sigfile" title="Signature">
         <t>The signature file MUST be an ASCII-armored 'detached signature' of the keylist
           file, as defined in OpenPGP Message Format [RFC4880].</t>
         <!-- TODO: Should we specify ASCII armored or not? At the moment, GPG Sync doesn't ASCII-armor the signature file, and it's a .sig, however I see no probably with using an ASCII-armored .asc file instead (and of course, I don't think there's any reason to require specific file extensions. It's just a URI after all, and this way you can choose to host the keylist and sig in, for example, github gists.) ~ML -->
         <!-- RESOLVED; I added language that specified ascii-armored. For all the reasons you specify, I think this is the best option. ~MM -->
       </section>
     </section>
-    <section anchor="inpractice"
-             title="In Practice">
+    <section anchor="inpractice" title="In Practice">
       <t>GPG Sync, an open source program created by one of the authors, implements
         this experimental standard. GPG Sync is used by First Look Media and the
         Freedom of the Press Foundation to keep OpenPGP keys in sync across their
@@ -255,10 +235,8 @@
       <t>First Look Media's keylist file can be found at https://github.com/firstlookmedia/gpgsync-firstlook-fingerprints</t>
       <!-- TODO: clunky. We could clean this. ~MM -->
     </section>
-    <section anchor="securityconsiderations"
-             title="Security Considerations">
-      <section anchor="securitybenefits"
-               title="Security Benefits">
+    <section anchor="securityconsiderations" title="Security Considerations">
+      <section anchor="securitybenefits" title="Security Benefits">
         <t>The keylist subscription functionality defined in this document provide a
           number of security benefits, including:</t>
         <t>
@@ -276,8 +254,7 @@
           </list>
         </t>
       </section>
-      <section anchor="securitydrawbacks"
-               title="Security Drawbacks">
+      <section anchor="securitydrawbacks" title="Security Drawbacks">
         <t>There is a situation in which keylist subscriptions could pose a potential
           security threat. If the authority key and the keylist distribution system
           were to both be compromised, it would be possible for an attacker to distribute
