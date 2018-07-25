@@ -261,7 +261,7 @@
           false keys. We believe, however, that the security benefits of this system
           strongly outweigh the drawbacks.</t>
         <t>If users do not run the client on a regular basis, there is the possibility
-          of users becoming just as out of sync as if they were not using any syncronization
+          of users becoming just as out of sync as if they were not using any synchronization
           service at all.</t>
       </section>
       <!-- TODO, see https://tools.ietf.org/html/bcp72 ~MM -->
