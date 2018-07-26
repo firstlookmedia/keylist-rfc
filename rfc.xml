@@ -186,7 +186,8 @@
       </t>
 
       <section anchor="terms" title="Keylist">
-        <t>The keylist MUST be encoded in UTF-8. Each line MUST begin either with a
+        <t>The keylist MUST be encoded in UTF-8          <xref target="RFC3629" />
+. Each line MUST begin either with a
           comment, a public key fingerprint, or whitespace. A comment is defined
           as a string of characters between a hash symbol (#, U+0023) and a newline
           or an end of file (EOF). The keylist SHOULD end with a newline. The fingerprint
@@ -278,6 +279,7 @@
       <?rfc include="reference.RFC.4880.xml"?>
       <?rfc include="reference.RFC.3986.xml"?>
       <?rfc include="reference.RFC.2119.xml"?>
+      <?rfc include="reference.RFC.3629.xml"?>
     </references>
     <!-- <references title="Informative References">
     </references> -->
