@@ -68,12 +68,14 @@
       <section anchor="notation" title="Requirements Notation">
         <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
           "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are
-          to be interpreted as described in [RFC2119].
+          to be interpreted as described in          <xref target="RFC2119" />
+.
         </t>
       </section>
       <section anchor="terminology" title="Terminology">
         <t>This document uses the terms "OpenPGP", "public key", "private key", "signature",
-          "keystore", and "fingerprint" as defined by OpenPGP Message Format [RFC4880].
+          "keystore", and "fingerprint" as defined by OpenPGP Message Format          <xref target="RFC4880" />
+.
         </t>
         <!-- TODO: add unicode definitions. ~MM -->
         <!-- TODO: verify that all the previous terms are actually defined in RFC4880. ~MM -->
@@ -114,9 +116,11 @@
           --that is, they should be permanently stored by the client to enable future
           automatic updates.
         </t>
-        <t>To subscribe to a keylist, the client must be aware of the keylist URI [RFC3986],
+        <t>To subscribe to a keylist, the client must be aware of the keylist URI (defined in
+          <xref target="RFC3986" />
+),
           the keylist's signature URI, and the fingerprint of the authority key used
-          to sign the keylist. The protocol used to retrieve the keylist and its
+          to sign the keylist. The protocol used to retrieve thbe keylist and its
           signature SHOULD be HTTPS, however other implementation are possible. A
           client implementing keylist functionality MUST support the retrieval of
           keylists and signatures over HTTPS. All other protocols are OPTIONAL.</t>
@@ -151,7 +155,7 @@
             </t>
             <t>Validate the format of the keylist according to
               <xref target="formats" />
-. If the keylist is in an invalid format, the client MUST abort the
+              . If the keylist is in an invalid format, the client MUST abort the
               update this keylist and SHOULD alert the user.
             </t>
             <t>For each fingerprint listed in the keyfile, if a copy of the associated
@@ -187,7 +191,8 @@
           as a string of characters between a hash symbol (#, U+0023) and a newline
           or an end of file (EOF). The keylist SHOULD end with a newline. The fingerprint
           MUST be the full 40-character hexadecimal public key fingerprint, as defined
-          in OpenPGP Message Format [RFC4880]. Space characters (' ', U+0020) MAY
+          in OpenPGP Message Format          <xref target="RFC4880" />
+. Space characters (' ', U+0020) MAY
           be included anywhere in the fingerprint. Lines SHOULD NOT exceed 128 characters
           in length.
         </t>
@@ -219,7 +224,8 @@
       </section>
       <section anchor="sigfile" title="Signature">
         <t>The signature file MUST be an ASCII-armored 'detached signature' of the keylist
-          file, as defined in OpenPGP Message Format [RFC4880].</t>
+          file, as defined in OpenPGP Message Format          <xref target="RFC4880" />
+.</t>
         <!-- TODO: Should we specify ASCII armored or not? At the moment, GPG Sync doesn't ASCII-armor the signature file, and it's a .sig, however I see no probably with using an ASCII-armored .asc file instead (and of course, I don't think there's any reason to require specific file extensions. It's just a URI after all, and this way you can choose to host the keylist and sig in, for example, github gists.) ~ML -->
         <!-- RESOLVED; I added language that specified ascii-armored. For all the reasons you specify, I think this is the best option. ~MM -->
       </section>
@@ -267,5 +273,13 @@
       <!-- TODO, see https://tools.ietf.org/html/bcp72 ~MM -->
     </section>
   </middle>
-  <back></back>
+  <back>
+    <references title="Normative References">
+      <?rfc include="reference.RFC.4880.xml"?>
+      <?rfc include="reference.RFC.3986.xml"?>
+      <?rfc include="reference.RFC.2119.xml"?>
+    </references>
+    <!-- <references title="Informative References">
+    </references> -->
+  </back>
 </rfc>
