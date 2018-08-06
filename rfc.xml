@@ -78,14 +78,15 @@
 				keystore up-to-date. Ensuring that all members of an
 				organization have their colleagues' most recent PGP public keys
 				is critical to maintaining operational security. Without the
-				most recent keys and a source of trust for those keys, users
-				must manually update and sign each others keys -- a system that
-				is untenable in larger organizations. This document proposes a
-				standard format for the keylist file as well as requirements for
-				clients who wish to implement keylist subscription
-				functionality.
+				most recent keys and a source of trust for those keys (as this
+				document specifies), users must manually update and sign each
+				others keys -- a system that is untenable in larger
+				organizations. This document proposes a standard format for the
+				keylist file as well as requirements for clients who wish to
+				implement keylist subscription functionality.
 			</t>
 			<!-- We'll want to tighten this abstract up a bit... ~MM -->
+			<!-- ^ I did what I could. ~MM -->
 		</abstract>
 	</front>
 	<middle>
