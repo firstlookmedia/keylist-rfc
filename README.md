@@ -2,6 +2,9 @@
 
 This repository contains the materials produced in the preparation of the RFC to standardize the key-list format and functionality provided by [GPGSync](https://github.com/firstlookmedia/gpgsync). Important materials as well as status updates will appear in this file.
 
+##### What's with the weird filenames?
+The IETF specifies that independently submitted I-D (Internet-Drafts) should follow the filename format `draft-[first author's last name]-[document name]-[version]`. `rfc.xml` is where development takes place. When a new version of the I-D is submitted, a copy of the `.xml` file submitted at that time is copied to the `submissions` directory.
+
 ## Development
 
  - edit `rfc.xml`
