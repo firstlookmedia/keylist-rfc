@@ -410,8 +410,7 @@
 			</t>
 			<!-- TODO: clunky. We could clean this. ~MM -->
 		</section>
-		<section anchor="securityconsiderations" title="Security
-		Considerations">
+		<section anchor="securityconsiderations" title="Security Considerations">
 			<section anchor="securitybenefits" title="Security Benefits">
 				<t>
 					The keylist subscription functionality defined in this
