@@ -266,9 +266,8 @@
           were to both be compromised, it would be possible for an attacker to distribute
           false keys. We believe, however, that the security benefits of this system
           strongly outweigh the drawbacks.</t>
-        <t>If users do not run the client on a regular basis, there is the possibility
-          of users becoming just as out of sync as if they were not using any synchronization
-          service at all.</t>
+        <t>If the client does not perform an update regularly, there is the possibility
+          that keys will be just as outdated as they would be without a keylist subscription.</t>
       </section>
       <!-- TODO, see https://tools.ietf.org/html/bcp72 ~MM -->
     </section>
