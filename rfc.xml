@@ -142,8 +142,8 @@
           given order.</t>
         <t>
           <list style="numbers">
-            <t>Obtain a current copy of the keylist.</t>
-            <t>Obtain a current copy of the keylist's signature data.</t>
+            <t>Obtain a current copy of the keylist from its URI.</t>
+            <t>Obtain a current copy of the keylist's signature data from its URI.</t>
             <!-- I say 'obtain' rather than retrieve because I want to leave open the possibility of a client checking to see if the hash of the file, for example, has changed, and only re-requesting if it has. 'Obtain' is also very ambiguous, though, so it may be to our advantage to use something more specific or explain this rationale outright. ~MM -->
             <!-- we should be verifying a checksum, and be explicit about it in this description. ~NDW -->
             <t>Using the keylist and the keylist's signature, cryptographically verify
@@ -238,53 +238,53 @@
         organizations, as well as to publish their employee's OpenPGP keys to the
         world. These organizations collectively employ more than 200 people and have
         used the system described in this document successfully for multiple years.</t>
-      <t>GPG Sync's existing code can be found at https://github.com/firstlookmedia/gpgsync</t>
-      <t>First Look Media's keylist file can be found at https://github.com/firstlookmedia/gpgsync-firstlook-fingerprints</t>
-      <!-- TODO: clunky. We could clean this. ~MM -->
-    </section>
-    <section anchor="securityconsiderations" title="Security Considerations">
-      <section anchor="securitybenefits" title="Security Benefits">
-        <t>The keylist subscription functionality defined in this document provide a
+      <t>GPG Sync's existing code can be found at &lt;https://github.com/firstlookmedia/gpgsync&gt;</t>
+      <t>First Look Media's keylist file can be found at &lt;https://github.com/firstlookmedia/gpgsync-firstlook-fingerprints        <&gt; /t>
+          <!-- TODO: clunky. We could clean this. ~MM -->
+        </section>
+        <section anchor="securityconsiderations" title="Security Considerations">
+          <section anchor="securitybenefits" title="Security Benefits">
+            <t>The keylist subscription functionality defined in this document provide a
           number of security benefits, including:</t>
-        <t>
-          <list style="symbols">
-            <t>The ability for new keys to be quickly distributed across an organization.</t>
-            <t>It removes the complexity of key distribution from end users, allowing
+            <t>
+              <list style="symbols">
+                <t>The ability for new keys to be quickly distributed across an organization.</t>
+                <t>It removes the complexity of key distribution from end users, allowing
               them to focus on the content of their communications rather than on
               key management.
-            </t>
-            <t>The ability for an organization to prevent the spread of falsely attributed
+                </t>
+                <t>The ability for an organization to prevent the spread of falsely attributed
               keys by centralizing the public key discovery process within their
               organization.
+                </t>
+                <!-- TODO: others? ~MM -->
+              </list>
             </t>
-            <!-- TODO: others? ~MM -->
-          </list>
-        </t>
-      </section>
-      <section anchor="securitydrawbacks" title="Security Drawbacks">
-        <t>There is a situation in which keylist subscriptions could pose a potential
+          </section>
+          <section anchor="securitydrawbacks" title="Security Drawbacks">
+            <t>There is a situation in which keylist subscriptions could pose a potential
           security threat. If the authority key and the keylist distribution system
           were to both be compromised, it would be possible for an attacker to distribute
           false keys. We believe, however, that the security benefits of this system
           strongly outweigh the drawbacks.</t>
-        <t>If the client does not perform an update regularly, there is the possibility
+            <t>If the client does not perform an update regularly, there is the possibility
           that keys will be just as outdated as they would be without a keylist subscription.</t>
-      </section>
-      <!-- TODO, see https://tools.ietf.org/html/bcp72 ~MM -->
-    </section>
-    <section anchor="ianaconsiderations" title="IANA Considerations">
-      <t>This document has no actions for IANA.</t>
-    </section>
-  </middle>
-  <back>
-    <references title="Normative References">
-      <?rfc include="reference.RFC.4880.xml"?>
-      <?rfc include="reference.RFC.3986.xml"?>
-      <?rfc include="reference.RFC.2119.xml"?>
-      <?rfc include="reference.RFC.3629.xml"?>
-      <?rfc include="reference.RFC.2818.xml"?>
-    </references>
-    <!-- <references title="Informative References">
+          </section>
+          <!-- TODO, see https://tools.ietf.org/html/bcp72 ~MM -->
+        </section>
+        <section anchor="ianaconsiderations" title="IANA Considerations">
+          <t>This document has no actions for IANA.</t>
+        </section>
+      </middle>
+      <back>
+        <references title="Normative References">
+          <?rfc include="reference.RFC.4880.xml"?>
+          <?rfc include="reference.RFC.3986.xml"?>
+          <?rfc include="reference.RFC.2119.xml"?>
+          <?rfc include="reference.RFC.3629.xml"?>
+          <?rfc include="reference.RFC.2818.xml"?>
+        </references>
+        <!-- <references title="Informative References">
     </references> -->
-  </back>
-</rfc>
+      </back>
+    </rfc>
