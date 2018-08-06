@@ -120,7 +120,8 @@
 ),
           the keylist's signature URI, and the fingerprint of the authority key used
           to sign the keylist. The protocol used to retrieve thbe keylist and its
-          signature SHOULD be HTTPS (see <xref target="RFC2818" />), however other implementation are possible. A
+          signature SHOULD be HTTPS (see          <xref target="RFC2818" />
+), however other implementation are possible. A
           client implementing keylist functionality MUST support the retrieval of
           keylists and signatures over HTTPS. All other protocols are OPTIONAL.</t>
         <t>A client MUST NOT employ a trust-on-first-use model for determining the fingerprint
@@ -270,6 +271,9 @@
           that keys will be just as outdated as they would be without a keylist subscription.</t>
       </section>
       <!-- TODO, see https://tools.ietf.org/html/bcp72 ~MM -->
+    </section>
+    <section anchor="ianaconsiderations" title="IANA Considerations">
+      <t>This document has no actions for IANA.</t>
     </section>
   </middle>
   <back>
