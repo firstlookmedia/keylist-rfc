@@ -5,7 +5,7 @@
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd">
-<rfc ipr="trust200902" docName="draft-mccain-keylist-00" category="exp">
+<rfc ipr="trust200902" docName="draft-mccain-keylist-01" category="exp">
 	<!-- TODO: We should verify that 'trust200902' is the intellectual property
 	designation we want. ~MM -->
 	<!-- TODO: figure out which category this goes in. ~MM -->
@@ -81,9 +81,9 @@
 				most recent keys and a source of trust for those keys (as this
 				document specifies), users must manually update and sign each
 				others keys -- a system that is untenable in larger
-				organizations. This document proposes a standard format for the
-				keylist file as well as requirements for clients who wish to
-				implement keylist subscription functionality.
+				organizations. This document proposes a experimental format for
+				the keylist file as well as requirements for clients who wish to
+				implement this experimental keylist subscription functionality.
 			</t>
 			<!-- We'll want to tighten this abstract up a bit... ~MM -->
 			<!-- ^ I did what I could. ~MM -->
@@ -96,7 +96,7 @@
 				to cryptographically signed keylists. This system allows for
 				seamless key rotation across entire organizations and enhances
 				operational security. To enable cross-client compatibility, this
-				document provides a standard format for the keylist, its
+				document provides a experimental format for the keylist, its
 				cryptographic verification, and the method by which it is
 				retreived by the client. The user interface by which a client
 				provides this functionality to the user is out of scope, as is
@@ -170,6 +170,17 @@
 					separate program that interfaces with an OpenPGP client to
 					update its keystore.
 				</t>
+			</section>
+			<section anchor="note-to-readers" title="Note to Readers">
+				<t>RFC Editor: please remove this section prior to
+				publication.</t>
+				<t>Development of this Internet draft takes place on GitHub at
+				<eref 
+				target="https://github.com/firstlookmedia/keylist-rfc">Keylist-RFC</eref>.
+				</t>
+				<t>A mailing list is available for discussion at <eref
+				target="https://www.freelists.org/list/keylists">Keylists
+				mailing list</eref>.</t>
 			</section>
 		</section>
 		<section anchor="functions" title="Functions and Procedures">
@@ -440,16 +451,12 @@
 			<section anchor="securitydrawbacks" title="Security Drawbacks">
 				<t>
 					There is a situation in which keylist subscriptions could
-					pose a potential security threat. If the authority key and
-					the keylist distribution system were to both be compromised,
-					it would be possible for an attacker to distribute false
-					keys. We believe, however, that the security benefits of
-					this system strongly outweigh the drawbacks.
-				</t>
-				<t>
-					If the client does not perform an update regularly, there is
-					the possibility that keys will be just as outdated as they
-					would be without a keylist subscription.
+					pose a potential security threat. If the both the authority
+					key and the keylist distribution system were to be
+					compromised, it would be possible for an attacker to
+					distribute false keys. We believe, however, that the
+					security benefits of this system strongly outweigh the
+					drawbacks.
 				</t>
 			</section>
 			<!-- TODO, see https://tools.ietf.org/html/bcp72 ~MM -->
