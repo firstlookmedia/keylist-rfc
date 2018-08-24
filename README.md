@@ -39,5 +39,5 @@ RFCs that are potentially relevant to the preparation of this document are liste
 * **August 22, 2018** — second draft published
 
 ## TODO
-[ ] Expand acronyms on first use
-[x] List normative and informative references
+* [ ] Expand acronyms on first use
+* [x] List normative and informative references
