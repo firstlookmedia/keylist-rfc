@@ -1,4 +1,4 @@
-# OpenPGPSync RFC
+# Keylist RFC
 
 This repository contains the materials produced in the preparation of the RFC to standardize the key-list format and functionality provided by [GPGSync](https://github.com/firstlookmedia/gpgsync). Important materials as well as status updates will appear in this file.
 
