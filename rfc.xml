@@ -319,21 +319,22 @@
 				The following are definitions of the data types we will be
 				creating to support this new feature set.
 			</t>
-			<section anchor="terms" title="Keylist">
+			<section anchor="keylist-format" title="Keylist">
 				<t>
 					The keylist MUST be encoded in UTF-8
 					<xref target="RFC3629" />
-					. Each line MUST begin either with a comment, a public key
-					fingerprint, or whitespace. A comment is defined as a string
-					of characters between a hash symbol (#, U+0023) and a
-					newline or an end of file (EOF). The keylist SHOULD end with
+					. A line MUST only contain a comment, a public key
+					fingerprint, or space characters (' ', U+0020). A comment is
+					defined as a string of characters between a hash symbol (#,
+					U+0023) and a newline (U+0010). The keylist SHOULD end with
 					a newline. The fingerprint MUST be the full 40-character
 					hexadecimal public key fingerprint, as defined in OpenPGP
 					Message Format
 					<xref target="RFC4880" />
-					. Space characters (' ', U+0020) MAY be included anywhere in
-					the fingerprint. Lines SHOULD NOT exceed 128 characters in
-					length.
+					. A space character (' ', U+0020) MAY be included anywhere
+					in the fingerprint. Lines SHOULD NOT exceed 128 characters
+					in length. A line MUST NOT contain more than one public key
+					fingerprint.
 				</t>
 				<t>
 					It is RECOMMENDED that keylist maintainers describe each key
@@ -362,7 +363,7 @@
 							the trailing newline.
 						</t>
 						<t>
-							Strip the keylist of all non-breaking whitespace.
+							Strip the keylist of all space characters (U+0020).
 						</t>
 					</list>
 				</t>
