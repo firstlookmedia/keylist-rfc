@@ -1,9 +1,13 @@
-# OpenPGPSync RFC
+# Keylist RFC
 
-This repository contains the materials produced in the preparation of the RFC to standardize the key-list format and functionality provided by [GPGSync](https://github.com/firstlookmedia/gpgsync). Important materials as well as status updates will appear in this file.
+This repository contains the materials produced in the preparation of the RFC to standardize the keylist format and functionality provided by [GPGSync](https://github.com/firstlookmedia/gpgsync).
 
 ##### What's with the weird filenames?
 The IETF specifies that independently submitted I-D (Internet-Drafts) should follow the filename format `draft-[first author's last name]-[document name]-[version]`. `rfc.xml` is where development takes place. When a new version of the I-D is submitted, a copy of the `.xml` file submitted at that time is copied to the `submissions` directory.
+
+## Quick Links
+* [IETF Datatracker](https://datatracker.ietf.org/doc/draft-mccain-keylist/) (for reading the official copy of the document)
+* [Mailing list](https://www.freelists.org/list/keylists) (for discussion and development)
 
 ## Development
 
@@ -29,8 +33,11 @@ RFCs that are potentially relevant to the preparation of this document are liste
 * [RFC4880](https://www.rfc-editor.org/rfc/rfc4880.txt): OpenPGP Message Format
 * [RFC2629](https://tools.ietf.org/html/rfc2629): Writing I-Ds and RFCs using XML
 
-## TODO
+## Updates
+* **August 6, 2018** — first draft published
+* **August 21, 2018** — mailing list created
+* **August 22, 2018** — second draft published
 
-* Add two blank spaces after each period in the RFC.
-* Expand acronyms on first use.
-* List normative and informative references.
+## TODO
+* [ ] Expand acronyms on first use
+* [x] List normative and informative references
