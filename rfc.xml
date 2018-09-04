@@ -55,7 +55,7 @@
 				</uri>
 			</address>
 		</author>
-		<date month="August" year="2018" day="21" />
+		<date month="September" year="2018" day="4" />
 		<area>
 			Security
 		</area>
@@ -129,8 +129,8 @@
 				not, but we should check. ~MM -->
 				<t>
 					The term "keylist" is defined as a list of OpenPGP public
-					keys identified by their fingerprints and accessible via a
-					URI. The exact format of this data is specified in
+					key fingerprints and accessible via a URI. The exact format
+					of this data is specified in
 					<xref target="formats" />
 					.
 				</t>
