@@ -175,7 +175,7 @@
 				<t>RFC Editor: please remove this section prior to
 				publication.</t>
 				<t>Development of this Internet draft takes place on GitHub at
-				<eref 
+				<eref
 				target="https://github.com/firstlookmedia/keylist-rfc">Keylist-RFC</eref>.
 				</t>
 				<t>A mailing list is available for discussion at <eref
@@ -204,9 +204,9 @@
 					To subscribe to a keylist, the client must be aware of the
 					keylist URI (defined in
 					<xref target="RFC3986" />
-					), the keylist's signature URI, and the fingerprint of the
-					authority key used to sign the keylist. The protocol used to
-					retrieve thbe keylist and its signature SHOULD be HTTPS (see
+					), and the fingerprint of the authority key used to sign the
+					keylist. The protocol used to retrieve the keylist and its
+					signature SHOULD be HTTPS (see
 					<xref target="RFC2818" />
 					), however other implementation are possible. A client
 					implementing keylist functionality MUST support the
@@ -245,7 +245,10 @@
 						</t>
 						<t>
 							Obtain a current copy of the keylist's signature
-							data from its URI.
+							data from its URI, which is included in the keylist data
+							format specified in
+							<xref target="formats" />
+							.
 						</t>
 						<!-- I say 'obtain' rather than retrieve because I want
 						to leave open the possibility of a client checking to
@@ -321,65 +324,76 @@
 			</t>
 			<section anchor="keylist-format" title="Keylist">
 				<t>
-					The keylist MUST be encoded in UTF-8
-					<xref target="RFC3629" />
-					. A line MUST only contain a comment, a public key
-					fingerprint, or space characters (' ', U+0020). A comment is
-					defined as a string of characters between a hash symbol (#,
-					U+0023) and a newline (U+0010). The keylist SHOULD end with
-					a newline. The fingerprint MUST be the full 40-character
+					The keylist MUST be formatted using JavaScript Object Notation
+					(JSON) Data Interchange Format
+					<xref target="RFC8259" />
+					with specific required keys and values to be defined.
+				</t>
+				<t>
+					The keylist MUST have a "metadata" key with an object as the
+					value. This object includes metadata about this keylist. The
+					object MUST contain a "signature_uri" key with the value of a
+					string that contains a URI where the keylist's signature data
+					can be obtained. All other metadata keys are OPTIONAL. The
+					object MAY contain a "keyserver" key with the value of a
+					string that contains a URI to a suggested keyserver for the
+					client to use. The object MAY contain a "comment" key with the
+					value of a string containing more information about this
+					keylist. The object MAY contain other arbitrary metadata about
+					this keylist.
+				</t>
+				<!-- TODO: Should we specify in more detail what a keyserver URI
+				is, or even what a keyserver is? More details here:
+				https://github.com/firstlookmedia/keylist-rfc/issues/8#issuecomment-427133308
+				~ML -->
+				<t>
+					The keylist MUST have a "keys" key with an array as the value.
+					This array contains a list of OpenPGP fingerprints and
+					metadata about them. Each item in the array MUST be an object.
+					Each of these objects MUST have a "fingerprint" key with the
+					value of a string that contains the full 40-character
 					hexadecimal public key fingerprint, as defined in OpenPGP
 					Message Format
 					<xref target="RFC4880" />
 					. A space character (' ', U+0020) MAY be included anywhere
-					in the fingerprint. Lines SHOULD NOT exceed 128 characters
-					in length. A line MUST NOT contain more than one public key
-					fingerprint.
+					in the fingerprint. These object MAY contain a "name",
+					"email", and "comment" key with values that are strings that
+					provide more information about the owner or use of this
+					OpenPGP public key. These objects MAY contain other arbitrary
+					metadata about this key. It is RECOMMENDED that keylist
+					maintainers use these extra fields to describe each key.
 				</t>
 				<t>
-					It is RECOMMENDED that keylist maintainers describe each key
-					using a comment, for example:
+					Here is an example keylist:
 				</t>
 				<figure>
-					<artwork>1326 CB16 ... DDBF 52A1 # Miles' Key</artwork>
+					<artwork>
+{
+  "metadata": {
+    "signature_uri": "https://www.example.com/keylist.json.asc"
+    "comment": "This is an example of a keylist file"
+  },
+  "keys": [
+    {
+      "fingerprint": "927F419D7EC82C2F149C1BD1403C2657CD994F73",
+      "name": "Micah Lee",
+      "email": "micah.lee@theintercept.com",
+      "comment": "Each key can have a comment"
+    },
+    {
+      "fingerprint": "1326CB162C6921BF085F8459F3C78280DDBF52A1",
+      "name": "R. Miles McCain",
+      "email": "0@rmrm.io"
+    },
+    {
+      "fingerprint": "E0BE0804CF04A65C1FC64CC4CAD802E066046C02",
+      "name": "Nat Welch",
+      "email": "nat.welch@firstlook.org"
+    }
+  ]
+}
+					</artwork>
 				</figure>
-				<!-- TODO: there must be better notation for this... ~MM -->
-				<!-- In v3, there is <sourcecode> ~NDW -->
-				<!-- TODO: I'm actually ambivalent about this recommendation. I
-				think fingerprints without spaces are just as good - in the end,
-				the point of the keylist is to be machine readable more than
-				human readable anyway. ~ML -->
-				<!-- ^ I was mostly referring to my use of the `<t>` tag for
-				example notation. :) ~MM -->
-				<t>
-					To extract the public key fingerprints from a keylist, a
-					client SHOULD perform the following steps, in order:
-				</t>
-				<t>
-					<list style="numbers">
-						<t>
-							Strip the keylist of all comments, as defined above,
-							including the preceding hash symbol but excluding
-							the trailing newline.
-						</t>
-						<t>
-							Strip the keylist of all space characters (U+0020).
-						</t>
-					</list>
-				</t>
-				<t>
-					Performing these steps will result in one public key
-					fingerprint per line.
-				</t>
-				<!-- TODO: find the way to properly define unicode ~MM -->
-				<!-- TODO: call it a file? Don't call it a file? What is the
-				best path? It's an internet resource. ~MM -->
-				<!-- I say let's keep the wording you have and show it to
-				others, and see their thoughts on calling it a "file". ~ML -->
-				<!-- TODO: adopt 'nonbreaking whitespace'/a citation from the
-				Unicode RFC. ~MM -->
-				<!-- TODO: ^ ask if the above is necessary, and if so, figure
-				out how to do it. ~MM -->
 			</section>
 			<section anchor="sigfile" title="Signature">
 				<t>
@@ -389,16 +403,6 @@
 					<xref target="RFC4880" />
 					.
 				</t>
-				<!-- TODO: Should we specify ASCII armored or not? At the
-				moment, GPG Sync doesn't ASCII-armor the signature file, and
-				it's a .sig, however I see no probably with using an
-				ASCII-armored .asc file instead (and of course, I don't think
-				there's any reason to require specific file extensions. It's
-				just a URI after all, and this way you can choose to host the
-				keylist and sig in, for example, github gists.) ~ML -->
-				<!-- RESOLVED; I added language that specified ascii-armored.
-				For all the reasons you specify, I think this is the best
-				option. ~MM -->
 			</section>
 		</section>
 		<section anchor="inpractice" title="In Practice">
@@ -473,7 +477,7 @@
 			<?rfc include="reference.RFC.4880.xml"?>
 			<?rfc include="reference.RFC.3986.xml"?>
 			<?rfc include="reference.RFC.2119.xml"?>
-			<?rfc include="reference.RFC.3629.xml"?>
+			<?rfc include="reference.RFC.8259.xml"?>
 			<?rfc include="reference.RFC.2818.xml"?>
 		</references>
 		<!--
