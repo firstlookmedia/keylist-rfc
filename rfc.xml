@@ -202,13 +202,11 @@
 				</t>
 				<t>
 					To subscribe to a keylist, the client must be aware of the
-					keylist URI (defined in
-					<xref target="RFC3986" />
-					), and the fingerprint of the authority key used to sign the
+					keylist URI (see <xref target="RFC3986" />), and the 
+					fingerprint of the authority key used to sign the
 					keylist. The protocol used to retrieve the keylist and its
-					signature SHOULD be HTTPS (see
-					<xref target="RFC2818" />
-					), however other implementation are possible. A client
+					signature SHOULD be HTTPS (see <xref target="RFC2818" />),
+					however other implementation MAY be supported. A client
 					implementing keylist functionality MUST support the
 					retrieval of keylists and signatures over HTTPS. All other
 					protocols are OPTIONAL.
@@ -246,9 +244,7 @@
 						<t>
 							Obtain a current copy of the keylist's signature
 							data from its URI, which is included in the keylist data
-							format specified in
-							<xref target="formats" />
-							.
+							format specified in <xref target="formats" />.
 						</t>
 						<!-- I say 'obtain' rather than retrieve because I want
 						to leave open the possibility of a client checking to
@@ -279,11 +275,13 @@
 						<t>
 							For each fingerprint listed in the keyfile, if a
 							copy of the associated public key is not present in
-							the client's local keystore, retrieve it from a
-							keyserver. If it is already present and not revoked,
+							the client's local keystore, retrieve it from the
+							keyserver specified by the keylist (see 
+							<xref target="formats" />) or, if the keylist specifies
+							no keyserver, from any keyserver.
+							If the key is already present and not revoked,
 							refresh it from a keyserver. If it is present and
-							revoked, ignore it. The method by which keys are
-							retrieved and updated is out of scope.
+							revoked, do nothing.
 						</t>
 						<!-- TODO: Is it overkill to establish some concept of a
 						'linked keystore' as the keystore that the client
@@ -319,28 +317,33 @@
 		</section>
 		<section anchor="formats" title="Data Element Formats">
 			<t>
-				The following are definitions of the data types we will be
-				creating to support this new feature set.
+				The following are format specifications for the keylist file and
+				its signature file.
 			</t>
 			<section anchor="keylist-format" title="Keylist">
 				<t>
-					The keylist MUST be formatted using JavaScript Object Notation
+					The keylist MUST be a valid JavaScript Object Notation
 					(JSON) Data Interchange Format
-					<xref target="RFC8259" />
-					with specific required keys and values to be defined.
+					<xref target="RFC8259" /> object with specific keys
+					and values, as defined below. Note that unless otherwise specified,
+					'key' in this section refers to JSON keys--not OpenPGP keys.
 				</t>
 				<t>
-					The keylist MUST have a "metadata" key with an object as the
-					value. This object includes metadata about this keylist. The
-					object MUST contain a "signature_uri" key with the value of a
-					string that contains a URI where the keylist's signature data
-					can be obtained. All other metadata keys are OPTIONAL. The
-					object MAY contain a "keyserver" key with the value of a
-					string that contains a URI to a suggested keyserver for the
-					client to use. The object MAY contain a "comment" key with the
-					value of a string containing more information about this
-					keylist. The object MAY contain other arbitrary metadata about
-					this keylist.
+					To encode metadata, the keylist MUST have a "metadata" root key
+					with an object as the value ("metadata object").
+					The metadata object MUST contain a "signature_uri" key whose value
+					is the URI string of the keylist's signature file. All metadata keys 
+					apart from "signature_uri" are OPTIONAL.
+				</t>
+				<t>
+					The metadata object MAY contain a "keyserver" key with the value of the
+					URI string of the keyserver from which the OpenPGP keys in the keylist
+					should be retrieved.
+				</t>
+				<t>
+					The metadata object MAY contain a "comment" key with the
+					value of any string. The metadata object MAY also contain other arbitrary
+					key-value pairs.
 				</t>
 				<!-- TODO: Should we specify in more detail what a keyserver URI
 				is, or even what a keyserver is? More details here:
@@ -348,23 +351,25 @@
 				~ML -->
 				<t>
 					The keylist MUST have a "keys" key with an array as the value.
-					This array contains a list of OpenPGP fingerprints and
+					This array contains a list of OpenPGP key fingerprints and
 					metadata about them. Each item in the array MUST be an object.
 					Each of these objects MUST have a "fingerprint" key with the
 					value of a string that contains the full 40-character
 					hexadecimal public key fingerprint, as defined in OpenPGP
 					Message Format
 					<xref target="RFC4880" />
-					. A space character (' ', U+0020) MAY be included anywhere
-					in the fingerprint. These object MAY contain a "name",
-					"email", and "comment" key with values that are strings that
-					provide more information about the owner or use of this
-					OpenPGP public key. These objects MAY contain other arbitrary
-					metadata about this key. It is RECOMMENDED that keylist
-					maintainers use these extra fields to describe each key.
+					. Any number of space characters (' ', U+0020) MAY be included
+					at any location in the fingerprint string. These objects MAY 
+					contain "name", "email", and "comment" key-value pairs, as well
+					as any other key-value pairs relevant.
+					<!-- Maybe the edit here was a bit _too_ reductive. Let me know if you
+					think I cut too much. The thinking is really that "name", "email", and
+					"comment" keys are really just optional, so it makes sense to merge them
+					into a single sentence, but I'm also completely open to reverting this
+					change if you prefer the old phrasing! -->
 				</t>
 				<t>
-					Here is an example keylist:
+					The following is an example of a valid keylist.
 				</t>
 				<figure>
 					<artwork>
