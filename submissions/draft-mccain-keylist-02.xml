@@ -5,7 +5,7 @@
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd">
-<rfc ipr="trust200902" docName="draft-mccain-keylist-01" category="exp">
+<rfc ipr="trust200902" docName="draft-mccain-keylist-02" category="exp">
 	<!-- TODO: We should verify that 'trust200902' is the intellectual property
 	designation we want. ~MM -->
 	<!-- TODO: figure out which category this goes in. ~MM -->
@@ -55,7 +55,7 @@
 				</uri>
 			</address>
 		</author>
-		<date month="September" year="2018" day="4" />
+		<date month="October" year="2018" day="13" />
 		<area>
 			Security
 		</area>
