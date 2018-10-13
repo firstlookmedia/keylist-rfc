@@ -37,6 +37,7 @@ RFCs that are potentially relevant to the preparation of this document are liste
 * **August 6, 2018** — first draft published
 * **August 21, 2018** — mailing list created
 * **August 22, 2018** — second draft published
+* **October 13, 2018** — third draft published
 
 ## TODO
 * [ ] Expand acronyms on first use
