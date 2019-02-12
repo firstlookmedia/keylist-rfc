@@ -5,7 +5,7 @@
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd">
-<rfc ipr="trust200902" docName="draft-mccain-keylist-02" category="exp">
+<rfc ipr="trust200902" docName="draft-mccain-keylist-03" category="std">
 	<!-- TODO: We should verify that 'trust200902' is the intellectual property
 	designation we want. ~MM -->
 	<!-- TODO: figure out which category this goes in. ~MM -->
@@ -43,19 +43,19 @@
 			</address>
 		</author>
 		<author initials="N.D.W." surname="Welch" fullname="Nat Welch">
-			<organization abbrev="FLM">
-				First Look Media
+			<organization abbrev="Google">
+				Google
 			</organization>
 			<address>
 				<email>
-					nat.welch@firstlook.media
+					nat@natwelch.com
 				</email>
 				<uri>
 					https://natwelch.com
 				</uri>
 			</address>
 		</author>
-		<date month="October" year="2018" day="13" />
+		<date month="February" year="2019" day="12" />
 		<area>
 			Security
 		</area>
@@ -197,7 +197,7 @@
 					When a client first subscribes to a keylist, it SHOULD
 					update or import every key present in the keylist into its
 					local keystore. Keylist subscriptions SHOULD be persistent
-					--that is, they should be permanently stored by the client
+					-- that is, they should be permanently stored by the client
 					to enable future automatic updates.
 				</t>
 				<t>
@@ -212,7 +212,7 @@
 					protocols are OPTIONAL.
 				</t>
 				<t>
-					A client MUST NOT employ a trust-on-first-use model for
+					A client MUST NOT employ a trust-on-first-use (TOFU) model for
 					determining the fingerprint of the authority key; it must be
 					explicitly provided by the user.
 				</t>
@@ -222,10 +222,15 @@
 					subscription functionality is exposed to the end-user.
 				</t>
 			</section>
-			<section anchor="keylist-update" title="Periodic Updates">
+			<section anchor="keylist-update" title="Automatic Updates">
 				<t>
 					The primary purpose of keylists is to enable periodic
 					updates of OpenPGP clients' internal keystores. We RECOMMEND
+					that clients provide automatic 'background' update functionality;
+					we also regonize that automatic background updates are not possible
+					in every application (specifically cross-platform CLI tools).
+				</t>
+				<t>When automatic background updates are provided, we RECOMMEND
 					that clients provide a default refresh interval of less than
 					one day, however we also RECOMMEND that clients allow the
 					user to select this interval. The exact time at which
@@ -325,7 +330,7 @@
 					(JSON) Data Interchange Format
 					<xref target="RFC8259" /> object with specific keys
 					and values, as defined below. Note that unless otherwise specified,
-					'key' in this section refers to JSON keys--not OpenPGP keys.
+					'key' in this section refers to JSON keys -- not OpenPGP keys.
 				</t>
 				<t>
 					To encode metadata, the keylist MUST have a "metadata" root key
@@ -463,9 +468,10 @@
 					pose a potential security threat. If the both the authority
 					key and the keylist distribution system were to be
 					compromised, it would be possible for an attacker to
-					distribute false keys. We believe, however, that the
-					security benefits of this system strongly outweigh the
-					drawbacks.
+					distribute any key of their choosing to the subscribers of the
+					keylist. The potential consequences of this attack are limited,
+					however, because the attacker cannot remove or modify the keys
+					already present on subscribers' systems.
 				</t>
 			</section>
 			<!-- TODO, see https://tools.ietf.org/html/bcp72 ~MM -->
