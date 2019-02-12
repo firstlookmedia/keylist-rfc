@@ -202,7 +202,7 @@
 				</t>
 				<t>
 					To subscribe to a keylist, the client must be aware of the
-					keylist URI (see <xref target="RFC3986" />), and the 
+					keylist URI (see <xref target="RFC3986" />), and the
 					fingerprint of the authority key used to sign the
 					keylist. The protocol used to retrieve the keylist and its
 					signature SHOULD be HTTPS (see <xref target="RFC2818" />),
@@ -276,7 +276,7 @@
 							For each fingerprint listed in the keyfile, if a
 							copy of the associated public key is not present in
 							the client's local keystore, retrieve it from the
-							keyserver specified by the keylist (see 
+							keyserver specified by the keylist (see
 							<xref target="formats" />) or, if the keylist specifies
 							no keyserver, from any keyserver.
 							If the key is already present and not revoked,
@@ -331,7 +331,7 @@
 					To encode metadata, the keylist MUST have a "metadata" root key
 					with an object as the value ("metadata object").
 					The metadata object MUST contain a "signature_uri" key whose value
-					is the URI string of the keylist's signature file. All metadata keys 
+					is the URI string of the keylist's signature file. All metadata keys
 					apart from "signature_uri" are OPTIONAL.
 				</t>
 				<t>
@@ -358,7 +358,7 @@
 					Message Format
 					<xref target="RFC4880" />
 					. Any number of space characters (' ', U+0020) MAY be included
-					at any location in the fingerprint string. These objects MAY 
+					at any location in the fingerprint string. These objects MAY
 					contain "name", "email", and "comment" key-value pairs, as well
 					as any other key-value pairs relevant.
 					<!-- Maybe the edit here was a bit _too_ reductive. Let me know if you
@@ -374,7 +374,7 @@
 					<artwork>
 {
   "metadata": {
-    "signature_uri": "https://www.example.com/keylist.json.asc"
+    "signature_uri": "https://www.example.com/keylist.json.asc",
     "comment": "This is an example of a keylist file"
   },
   "keys": [
