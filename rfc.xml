@@ -73,18 +73,18 @@
 		</keyword>
 		<abstract>
 			<t>
-				This document specifies a system by which an OpenPGP client may
-				subscribe to an organization's public keylist to keep its
-				keystore up-to-date with correct keys, even in cases where
-				the keys correspond to multiple (potentially uncontrolled) domains.
-				Ensuring that all members or followers of an organization have their colleagues' most recent PGP
-				public keys is critical to maintaining operational security. Without the
-				most recent keys' fingerprints and a source of trust for those keys (as this
-				document specifies), users must manually update and sign each
-				others' keys -- a system that is untenable in larger
-				organizations. This document proposes a experimental format for
-				the keylist file as well as requirements for clients who wish to
-				implement this experimental keylist subscription functionality.
+				This document specifies a system by which an OpenPGP client may subscribe
+				to an organization's public keylist to keep its keystore up-to-date with
+				correct keys, even in cases where the keys correspond to multiple
+				(potentially uncontrolled) domains. Ensuring that all members or followers
+				of an organization have their colleagues' most recent PGP public keys is
+				critical to maintaining operational security. Without the most recent
+				keys' fingerprints and a source of trust for those keys (as this document
+				specifies), users must manually update and sign each others' keys -- a
+				system that is untenable in larger organizations. This document proposes a
+				experimental format for the keylist file as well as requirements for
+				clients who wish to implement this experimental keylist subscription
+				functionality.
 			</t>
 			<!-- We'll want to tighten this abstract up a bit... ~MM -->
 			<!-- ^ I did what I could. ~MM -->
@@ -93,18 +93,17 @@
 	<middle>
 		<section anchor="intro" title="Introduction">
 			<t>
-				This document specifies a system by which clients may subscribe
-				to cryptographically signed 'keylists' of public key fingerprints.
-				The public keys do not necesssarily all correspond to a single domain.
-				This system enhances operational security by allowomg seamless key rotation across entire
-				organizations without centralized public key hosting. To enable cross-client compatibility, this
-				document provides a experimental format for the keylist, its
-				cryptographic verification, and the method by which it is
-				retreived by the client. The user interface by which a client
-				provides this functionality to the user is out of scope, as is
-				the process by which the client retrieves public keys. Other
-				non-security-related implementation details are also out of
-				scope.
+				 This document specifies a system by which clients may subscribe to
+				 cryptographically signed 'keylists' of public key fingerprints. The public
+				 keys do not necesssarily all correspond to a single domain. This system
+				 enhances operational security by allowomg seamless key rotation across
+				 entire organizations without centralized public key hosting. To enable
+				 cross-client compatibility, this document provides a experimental format
+				 for the keylist, its cryptographic verification, and the method by which it
+				 is retreived by the client. The user interface by which a client provides
+				 this functionality to the user is out of scope, as is the process by which
+				 the client retrieves public keys. Other non-security-related implementation
+				 details are also out of scope.
 			</t>
 			<section anchor="notation" title="Requirements Notation">
 				<t>
@@ -131,13 +130,11 @@
 				<!-- TODO: does 'URI' and 'Internet' need a citation? Probably
 				not, but we should check. ~MM -->
 				<t>
-					The term "keylist" is defined as a list of OpenPGP public
-					key fingerprints and accessible via a URI. The exact format
-					of this data is specified in
-					<xref target="formats" />
-					. Keylists SHOULD be treated as public documents; although
-					a system administrator MAY choose, for example, to restrict
-					access to a keylist to a specific subnet. 
+					 The term "keylist" is defined as a list of OpenPGP public key fingerprints
+					 and accessible via a URI. The exact format of this data is specified in
+					 <xref target="formats" />. Keylists SHOULD be treated as public
+					 documents; although a system administrator MAY choose, for example, to
+					 restrict access to a keylist to a specific subnet.
 				</t>
 				<!-- TODO: I avoid using the word 'file' here as it has a
 				nuanced meaning and really we're just talking about data
@@ -483,24 +480,25 @@
 			<section anchor="wkd" title="Web Key Directories">
 				<t>
 					Unlike Web Key Directories, keylists are not domain specific. A keylist
-					might contain public key fingerprints for email addresses across several different
-					domains. Moreover, keylists only provide references to public keys by way
-					of fingerprints; Web Key Directories provide the public keys themselves.
+					might contain public key fingerprints for email addresses across several
+					different domains. Moreover, keylists only provide references to public
+					keys by way of fingerprints; Web Key Directories provide the public keys
+					themselves.
 				</t>
 			</section>
 			<section anchor="dns" title="OPENPGPKEY DNS Records">
 				<t>
-					A keylist MAY reference public keys corresponding to email addresses across several
-					different domains. Because managing OPENPGPKEY DNS Records <xref target="RFC7929" />
-					for a particular domain requires control of that domain, the OPENPGPKEY DNS Record
-					system is not suitable for cases in which keys are strewn about several different
-					domains, including ones outside of the control of an organization's system adminitrators. 
+					 A keylist MAY reference public keys corresponding to email addresses
+					 across several different domains. Because managing OPENPGPKEY DNS Records
+					 <xref target="RFC7929" /> for a particular domain requires control of that
+					 domain, the OPENPGPKEY DNS Record system is not suitable for cases in
+					 which keys are strewn about several different domains, including ones
+					 outside of the control of an organization's system adminitrators.
 				</t>
 			</section>
 			<!-- We'll want to clean this up, but the messaging we'd like to convey is there. -->
 		</section>
 		<section anchor="securityconsiderations" title="Security Considerations">
-			<section anchor="securitydrawbacks" title="Security Drawbacks">
 				<t>
 					There is a situation in which keylist subscriptions could
 					pose a potential security threat. If the both the authority
@@ -519,7 +517,6 @@
 					keyservers -- this specification ensures to the best of its ability
 					the integrity of keylists, but not the privacy of keylists.
 				</t>
-			</section>
 			<!-- TODO, see https://tools.ietf.org/html/bcp72 ~MM -->
 		</section>
 		<section anchor="ianaconsiderations" title="IANA Considerations">
