@@ -75,9 +75,10 @@
 			<t>
 				This document specifies a system by which an OpenPGP client may
 				subscribe to an organization's keylist to keep its internal
-				keystore up-to-date. Ensuring that all members of an
-				organization have their colleagues' most recent PGP public keys
-				is critical to maintaining operational security. Without the
+				keystore up-to-date, even in cases where the keys
+				are under several different domains. Ensuring that all members or
+				followers of an organization have their colleagues' most recent PGP
+				public keys is critical to maintaining operational security. Without the
 				most recent keys and a source of trust for those keys (as this
 				document specifies), users must manually update and sign each
 				others keys -- a system that is untenable in larger
@@ -93,8 +94,10 @@
 		<section anchor="intro" title="Introduction">
 			<t>
 				This document specifies a system by which clients may subscribe
-				to cryptographically signed keylists. This system allows for
-				seamless key rotation across entire organizations and enhances
+				to cryptographically signed 'keylists' of public key fingerprints.
+				The public keys do not necesssarily all correspond to a single domain.
+				This system allows for seamless key rotation across entire
+				organizations without centralized public key hosting and enhances
 				operational security. To enable cross-client compatibility, this
 				document provides a experimental format for the keylist, its
 				cryptographic verification, and the method by which it is
@@ -132,7 +135,9 @@
 					key fingerprints and accessible via a URI. The exact format
 					of this data is specified in
 					<xref target="formats" />
-					.
+					. Keylists SHOULD be treated as public documents; although
+					a system administrator MAY choose, for example, to restrict
+					access to a keylist to a specific subnet. 
 				</t>
 				<!-- TODO: I avoid using the word 'file' here as it has a
 				nuanced meaning and really we're just talking about data
@@ -176,11 +181,10 @@
 				publication.</t>
 				<t>Development of this Internet draft takes place on GitHub at
 				<eref
-				target="https://github.com/firstlookmedia/keylist-rfc">Keylist-RFC</eref>.
+				target="https://github.com/firstlookmedia/keylist-rfc">firstlookmedia/Keylist-RFC</eref>.
 				</t>
-				<t>A mailing list is available for discussion at <eref
-				target="https://www.freelists.org/list/keylists">Keylists
-				mailing list</eref>.</t>
+				<t>We are still considering whether this Draft is better for the Experimental or
+				Informational track.</t>
 			</section>
 		</section>
 		<section anchor="functions" title="Functions and Procedures">
@@ -213,13 +217,18 @@
 				</t>
 				<t>
 					A client MUST NOT employ a trust-on-first-use (TOFU) model for
-					determining the fingerprint of the authority key; it must be
-					explicitly provided by the user.
+					determining the fingerprint of the authority public key; the
+					authority public key fingerprint must be explicitly provided
+					by the user.
 				</t>
 				<t>
 					The process by which the client stores its keylist
 					subscriptions is out of scope, as is the means by which
 					subscription functionality is exposed to the end-user.
+				</t>
+				<t>
+					The client MAY provide the option to perform all its network
+					activity over a SOCKS5 proxy (see <xref target="RFC1928" />).
 				</t>
 			</section>
 			<section anchor="keylist-update" title="Automatic Updates">
@@ -413,8 +422,17 @@
 					.
 				</t>
 			</section>
+			<section anchor="wellknown" title="Well-Known URL">
+				<t>
+					Keylists SHOULD NOT be well-known resources <xref target="RFC4880" />.
+					To subscribe to a keylist, the client must be aware not only of the keylist's
+					location, but also of the fingerprint of the authority public key used to sign the keylist.
+					Furthermore, because keylists can reference public keys from several different domains,
+					the host of the well-known location for a keylist may not always be clear.
+				</t>
+			</section>
 		</section>
-		<section anchor="inpractice" title="In Practice">
+		<section anchor="implementation" title="Implementation Status">
 			<t>
 				GPG Sync, an open source program created by one of the authors,
 				implements this experimental standard. GPG Sync is used by First
@@ -435,33 +453,53 @@
 			</t>
 			<!-- TODO: clunky. We could clean this. ~MM -->
 		</section>
-		<section anchor="securityconsiderations" title="Security Considerations">
-			<section anchor="securitybenefits" title="Security Benefits">
+		<section anchor="securitybenefits" title="Security Benefits">
+			<t>
+				The keylist subscription functionality defined in this
+				document provides a number of security benefits, including:
+			</t>
+			<t>
+				<list style="symbols">
+					<t>
+						The ability for new keys to be quickly distributed
+						across an organization.
+					</t>
+					<t>
+						Removing the complexity of key distribution from
+						end users, allowing them to focus on the content of
+						their communications rather than on key management.
+					</t>
+					<t>
+						The ability for an organization to prevent the
+						spread of falsely attributed keys by centralizing
+						the public key discovery process within their
+						organization without centralized public key hosting.
+					</t>
+					<!-- TODO: others? ~MM -->
+				</list>
+			</t>
+		</section>
+		<section anchor="comparison" title="Relation to Other Technologies">
+			<section anchor="wkd" title="Web Key Directories">
 				<t>
-					The keylist subscription functionality defined in this
-					document provide a number of security benefits, including:
-				</t>
-				<t>
-					<list style="symbols">
-						<t>
-							The ability for new keys to be quickly distributed
-							across an organization.
-						</t>
-						<t>
-							It removes the complexity of key distribution from
-							end users, allowing them to focus on the content of
-							their communications rather than on key management.
-						</t>
-						<t>
-							The ability for an organization to prevent the
-							spread of falsely attributed keys by centralizing
-							the public key discovery process within their
-							organization.
-						</t>
-						<!-- TODO: others? ~MM -->
-					</list>
+					Unlike Web Key Directories, keylists are not domain specific. A keylist
+					might contain public key fingerprints for email addresses across several different
+					domains. Moreover, keylists only provide references to public keys by way
+					of fingerprints; Web Key Directories provide the public keys themselves.
 				</t>
 			</section>
+			<section anchor="dns" title="OPENPGPKEY DNS Records">
+				<t>
+					A keylist MAY reference public keys corresponding to email addresses across several
+					different domains. Because managing OPENPGPKEY DNS Records <xref target="RFC7929" />
+					for a particular domain requires control of that domain, the OPENPGPKEY DNS Record
+					system is not suitable for cases in which keys are strewn about several different
+					domains, including ones outside of the control of an organization's system adminitrators. 
+				</t>
+			</section>
+			<!-- We'll want to clean this up, but the messaging we'd like to convey is there. -->
+		</section>
+		<section anchor="securityconsiderations" title="Security Considerations">
 			<section anchor="securitydrawbacks" title="Security Drawbacks">
 				<t>
 					There is a situation in which keylist subscriptions could
@@ -484,11 +522,13 @@
 	</middle>
 	<back>
 		<references title="Normative References">
+			<?rfc include="reference.RFC.7929.xml"?>
 			<?rfc include="reference.RFC.4880.xml"?>
 			<?rfc include="reference.RFC.3986.xml"?>
 			<?rfc include="reference.RFC.2119.xml"?>
 			<?rfc include="reference.RFC.8259.xml"?>
 			<?rfc include="reference.RFC.2818.xml"?>
+			<?rfc include="reference.RFC.1928.xml"?>
 		</references>
 		<!--
 		<references title="Informative References"> </references>
