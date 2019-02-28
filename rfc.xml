@@ -14,7 +14,7 @@
 		system before we submit. It never also hurts to have a more catchy
 		title... -->
 		<title abbrev="OpenPGP Keylist Subscriptions">
-			Distributing OpenPGP Keys with Signed Keylist Subscriptions
+			Distributing OpenPGP Key Fingerprints with Signed Keylist Subscriptions
 		</title>
 		<author initials="M.M." surname="McCain" fullname="R. Miles McCain">
 			<organization abbrev="FLM">
@@ -74,14 +74,14 @@
 		<abstract>
 			<t>
 				This document specifies a system by which an OpenPGP client may
-				subscribe to an organization's keylist to keep its internal
-				keystore up-to-date, even in cases where the keys
-				are under several different domains. Ensuring that all members or
-				followers of an organization have their colleagues' most recent PGP
+				subscribe to an organization's public keylist to keep its
+				keystore up-to-date with correct keys, even in cases where
+				the keys correspond to multiple (potentially uncontrolled) domains.
+				Ensuring that all members or followers of an organization have their colleagues' most recent PGP
 				public keys is critical to maintaining operational security. Without the
-				most recent keys and a source of trust for those keys (as this
+				most recent keys' fingerprints and a source of trust for those keys (as this
 				document specifies), users must manually update and sign each
-				others keys -- a system that is untenable in larger
+				others' keys -- a system that is untenable in larger
 				organizations. This document proposes a experimental format for
 				the keylist file as well as requirements for clients who wish to
 				implement this experimental keylist subscription functionality.
@@ -96,9 +96,8 @@
 				This document specifies a system by which clients may subscribe
 				to cryptographically signed 'keylists' of public key fingerprints.
 				The public keys do not necesssarily all correspond to a single domain.
-				This system allows for seamless key rotation across entire
-				organizations without centralized public key hosting and enhances
-				operational security. To enable cross-client compatibility, this
+				This system enhances operational security by allowomg seamless key rotation across entire
+				organizations without centralized public key hosting. To enable cross-client compatibility, this
 				document provides a experimental format for the keylist, its
 				cryptographic verification, and the method by which it is
 				retreived by the client. The user interface by which a client
@@ -124,6 +123,7 @@
 					OpenPGP Message Format
 					<xref target="RFC4880" />
 					.
+					<!-- TODO: clarify the _type_ of fingerprints we use (ideally V4/SHA-160) -->
 				</t>
 				<!-- TODO: add unicode definitions. ~MM -->
 				<!-- TODO: verify that all the previous terms are actually
@@ -510,6 +510,14 @@
 					keylist. The potential consequences of this attack are limited,
 					however, because the attacker cannot remove or modify the keys
 					already present on subscribers' systems.
+				</t>
+				<t>
+					Some organizations may wish to keep their keylists private. While
+					this may be achievable by serving keylists at URIs only accessible from
+					specific subnets, keylists are designed to be public
+					documents. As such, clients may leak the contents of keylists to
+					keyservers -- this specification ensures to the best of its ability
+					the integrity of keylists, but not the privacy of keylists.
 				</t>
 			</section>
 			<!-- TODO, see https://tools.ietf.org/html/bcp72 ~MM -->
