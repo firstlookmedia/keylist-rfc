@@ -96,7 +96,7 @@
 				 This document specifies a system by which clients may subscribe to
 				 cryptographically signed 'keylists' of public key fingerprints. The public
 				 keys do not necesssarily all correspond to a single domain. This system
-				 enhances operational security by allowomg seamless key rotation across
+				 enhances operational security by allowing seamless key rotation across
 				 entire organizations without centralized public key hosting. To enable
 				 cross-client compatibility, this document provides a experimental format
 				 for the keylist, its cryptographic verification, and the method by which it
@@ -501,7 +501,7 @@
 		<section anchor="securityconsiderations" title="Security Considerations">
 				<t>
 					There is a situation in which keylist subscriptions could
-					pose a potential security threat. If the both the authority
+					pose a potential security threat. If both the authority
 					key and the keylist distribution system were to be
 					compromised, it would be possible for an attacker to
 					distribute any key of their choosing to the subscribers of the
