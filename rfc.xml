@@ -55,7 +55,7 @@
 				</uri>
 			</address>
 		</author>
-		<date month="March" year="2019" day="6" />
+		<date month="September" year="2019" day="2" />
 		<area>
 			Security
 		</area>
@@ -75,7 +75,7 @@
 			<t>
 				This document specifies a system by which an OpenPGP client may subscribe
 				to an organization's public keylist to keep its keystore up-to-date with
-				correct keys, even in cases where the keys correspond to multiple
+				correct keys from the correct keyserver(s), even in cases where the keys correspond to multiple
 				(potentially uncontrolled) domains. Ensuring that all members or followers
 				of an organization have their colleagues' most recent PGP public keys is
 				critical to maintaining operational security. Without the most recent
@@ -121,7 +121,7 @@
 					"private key", "signature", and "fingerprint" as defined by
 					OpenPGP Message Format
 					<xref target="RFC4880" />
-					.
+					(the fingerprint type SHOULD be V4).
 					<!-- TODO: clarify the _type_ of fingerprints we use (ideally V4/SHA-160) -->
 				</t>
 				<!-- TODO: add unicode definitions. ~MM -->
@@ -131,10 +131,10 @@
 				not, but we should check. ~MM -->
 				<t>
 					 The term "keylist" is defined as a list of OpenPGP public key fingerprints
-					 and accessible via a URI. The exact format of this data is specified in
+					 accessible via a URI in the format specified in
 					 <xref target="formats" />. Keylists SHOULD be treated as public
-					 documents; although a system administrator MAY choose, for example, to
-					 restrict access to a keylist to a specific subnet.
+					 documents, however a system administrator MAY choose, for example, to
+					 restrict access to a keylist to a specific subnet or private network.
 				</t>
 				<!-- TODO: I avoid using the word 'file' here as it has a
 				nuanced meaning and really we're just talking about data
@@ -181,7 +181,7 @@
 				target="https://github.com/firstlookmedia/keylist-rfc">firstlookmedia/Keylist-RFC</eref>.
 				</t>
 				<t>We are still considering whether this Draft is better for the Experimental or
-				Informational track.</t>
+				Informational track. All feedback is appreciated.</t>
 			</section>
 		</section>
 		<section anchor="functions" title="Functions and Procedures">
@@ -250,12 +250,21 @@
 				<t>
 					<list style="numbers">
 						<t>
-							Obtain a current copy of the keylist from its URI.
+							Obtain a current copy of the keylist from its URI. If a
+							current copy (i.e. not from local cache) cannot be obtained,
+							the client SHOULD abort the update for this keylist and notify
+							the user. The client SHOULD continue the update for other keylists
+							to which it is subscribed, notwithstanding also failing the criteria
+							described in this section.
 						</t>
 						<t>
 							Obtain a current copy of the keylist's signature
 							data from its URI, which is included in the keylist data
-							format specified in <xref target="formats" />.
+							format specified in <xref target="formats" />. If a current copy
+							cannot be obtained, the client SHOULD abort the update and notify
+							the user. The client SHOULD continue the update for other keylists
+							to which it is subscribed, notwithstanding also failing the criteria
+							described in this section.
 						</t>
 						<!-- I say 'obtain' rather than retrieve because I want
 						to leave open the possibility of a client checking to
@@ -281,18 +290,21 @@
 							<xref target="formats" />
 							. If the keylist is in an invalid format, the client
 							MUST abort the update this keylist and SHOULD alert
-							the user.
+							the user. The client SHOULD continue the update for
+							other keylists to which it is subscribed, notwithstanding
+							also failing the criteria described in this section.
 						</t>
 						<t>
 							For each fingerprint listed in the keyfile, if a
 							copy of the associated public key is not present in
 							the client's local keystore, retrieve it from the
-							keyserver specified by the keylist (see
+							keyserver specified by either the key entry, the keylist (see
 							<xref target="formats" />) or, if the keylist specifies
-							no keyserver, from any keyserver.
+							no keyserver, from the user's default keyserver.
 							If the key is already present and not revoked,
-							refresh it from a keyserver. If it is present and
-							revoked, do nothing.
+							refresh it from the keyserver determined in the same 
+							manner as above. If it is present and revoked, do nothing
+							for that particular key.
 						</t>
 						<!-- TODO: Is it overkill to establish some concept of a
 						'linked keystore' as the keystore that the client
@@ -347,8 +359,12 @@
 				</t>
 				<t>
 					The metadata object MAY contain a "keyserver" key with the value of the
-					URI string of the keyserver from which the OpenPGP keys in the keylist
-					should be retrieved.
+					URI string of a HKP keyserver from which the OpenPGP keys in the keylist
+					should be retrieved. Each PGP key listed in the keylist MAY have a
+					"keyserver" JSON key; if a PGP key in the keylist specifies a HKP keyserver that is
+					different from the one described in the metadata object, the PGP key-specific
+					keyserver should be used to retrieve that particular key (and not the key listed
+					in the metadata object).
 				</t>
 				<t>
 					The metadata object MAY contain a "comment" key with the
@@ -370,8 +386,10 @@
 					<xref target="RFC4880" />
 					. Any number of space characters (' ', U+0020) MAY be included
 					at any location in the fingerprint string. These objects MAY
-					contain "name", "email", and "comment" key-value pairs, as well
-					as any other key-value pairs relevant.
+					contain "name" (the name of the PGP key's owner), "email" 
+					(an email of the PGP key's owner), "keyserver" (a HKP keyserver 
+					from which the key should be retrieved), and "comment" key-value pairs,
+					as well as any other key-value pairs.
 					<!-- Maybe the edit here was a bit _too_ reductive. Let me know if you
 					think I cut too much. The thinking is really that "name", "email", and
 					"comment" keys are really just optional, so it makes sense to merge them
@@ -398,7 +416,8 @@
     {
       "fingerprint": "1326CB162C6921BF085F8459F3C78280DDBF52A1",
       "name": "R. Miles McCain",
-      "email": "0@rmrm.io"
+      "email": "0@rmrm.io",
+	  "keyserver": "https://keys.openpgp.org/"
     },
     {
       "fingerprint": "E0BE0804CF04A65C1FC64CC4CAD802E066046C02",
@@ -425,7 +444,7 @@
 					To subscribe to a keylist, the client must be aware not only of the keylist's
 					location, but also of the fingerprint of the authority public key used to sign the keylist.
 					Furthermore, because keylists can reference public keys from several different domains,
-					the host of the well-known location for a keylist may not always be clear.
+					the expected host of the well-known location for a keylist may not always be self-evident.
 				</t>
 			</section>
 		</section>
