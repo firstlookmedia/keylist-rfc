@@ -300,7 +300,11 @@
 							the client's local keystore, retrieve it from the
 							keyserver specified by either the key entry, the keylist (see
 							<xref target="formats" />) or, if the keylist specifies
-							no keyserver, from the user's default keyserver.
+							no keyserver, from the user's default keyserver. If the public
+							key cannot be found for a particular fingerprint, the client
+							MUST NOT abort the entire update process; instead, it SHOULD
+							notify the user that the key retrieval failed but otherwise
+							merely skip updating the key and continue.
 							If the key is already present and not revoked,
 							refresh it from the keyserver determined in the same 
 							manner as above. If it is present and revoked, do nothing
